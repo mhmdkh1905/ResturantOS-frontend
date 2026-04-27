@@ -1,0 +1,38 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sidebar-width: 220px;
+  --sidebar-bg: #1a1a1a;
+  --sidebar-border: #2a2a2a;
+  --accent: #f97316;
+  --accent-hover: #ea6c0a;
+  --text-primary: #ffffff;
+  --text-muted: #a0a0a0;
+  --nav-hover-bg: #2a2a2a;
+  --active-bg: #f97316;
+  --active-text: #ffffff;
+  --page-bg: #fafafa;
+  --page-text: #111111;
+  --page-text-muted: #888888;
+  --error: #e53935;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}

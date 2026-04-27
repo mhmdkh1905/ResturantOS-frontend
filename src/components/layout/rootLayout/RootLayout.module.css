@@ -1,0 +1,55 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--page-bg);
+}
+
+.content {
+  flex: 1;
+  padding: 28px;
+}
+
+.mobileHeader {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid var(--sidebar-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .menuBtn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+  }
+
+  .mobileTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .content {
+    padding: 16px;
+  }
+}
