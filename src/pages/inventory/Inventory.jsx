@@ -42,11 +42,9 @@ export default function Inventory() {
 
   const handleDelete = (id) => {
     deleteInventoryItem(id);
-
   };
 
   const handleEdit = (id, updated) => {
-  
     updateInventoryItem({ id, data: updated });
   };
 
