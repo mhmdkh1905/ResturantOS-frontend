@@ -75,6 +75,16 @@ export default function Inventory() {
     }
   }, [successMessage]);
 
+  if (isLoading) {
+    return <p className={styles.loading}>Loading inventory...</p>;
+  }
+
+  if (isError) {
+    return (
+      <p className={styles.error}>Error loading inventory: {error.message}</p>
+    );
+  }
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>

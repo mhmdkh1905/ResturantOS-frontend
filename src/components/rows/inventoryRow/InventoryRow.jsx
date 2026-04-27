@@ -9,7 +9,7 @@ export default function InventoryRow({ item, onDelete, onEdit }) {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ ...item });
 
-  const isLow = item.isLowStock;
+  const isLow = item.quantity <= item.minThreshold;
   const stockPct = Math.min((item.quantity / item.minThreshold) * 100, 100);
 
   const handleSave = () => {
