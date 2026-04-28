@@ -28,7 +28,7 @@ export const updateTable = async (id, data) => {
     }),
   };
 
-  const res = await api.patch(`/tables/${id}`, payload);
+  const res = await api.put(`/tables/${id}`, payload);
   return res.data;
 };
 
