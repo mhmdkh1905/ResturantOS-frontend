@@ -1,0 +1,46 @@
+.page {
+  padding: 8px 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--page-text);
+  margin-bottom: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1.5px solid #eeeeee;
+  border-radius: 16px;
+  padding: 8px 0;
+  max-width: 720px;
+}
+
+.divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 4px 0;
+}
+
+.signOutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 24px;
+  padding: 8px 16px;
+  border: 1.5px solid #fecaca;
+  border-radius: 9px;
+  background: #fff;
+  color: #e53e3e;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.signOutBtn:hover {
+  background: #fff5f5;
+  border-color: #e53e3e;
+}

@@ -4,7 +4,7 @@
   gap: 6px;
   padding: 14px 16px;
   font-weight: 500;
-  color: #111;
+  color: var(--page-text);
   white-space: nowrap;
 }
 
@@ -14,11 +14,11 @@ td {
 }
 
 .muted {
-  color: #666;
+  color: var(--page-text-muted);
 }
 
 .qty {
-  color: #111;
+  color: var(--page-text);
   font-weight: 500;
 }
 .lowQty {

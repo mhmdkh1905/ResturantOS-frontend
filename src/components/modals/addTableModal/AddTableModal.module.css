@@ -10,8 +10,9 @@
 }
 
 .modal {
-  background: #faf9f7;
+  background: var(--card-bg);
   border-radius: 16px;
+  border-color: var(--card-border);
   padding: 24px;
   width: 100%;
   max-width: 360px;
@@ -28,13 +29,13 @@
 .modalTitle {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
 }
 
 .closeBtn {
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--page-text-muted);
   cursor: pointer;
   padding: 4px;
   border-radius: 6px;
@@ -60,16 +61,16 @@
 .label {
   font-size: 0.83rem;
   font-weight: 600;
-  color: #333;
+  color: var(--page-text);
 }
 
 .input {
   padding: 10px 14px;
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid var(--card-border);
   border-radius: 10px;
   font-size: 0.9rem;
-  color: #111;
-  background: #fff;
+  color: var(--page-text);
+  background: var(--input-bg);
   outline: none;
   transition: border-color 0.15s;
 }

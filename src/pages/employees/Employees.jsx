@@ -88,14 +88,20 @@ export default function Employees() {
         <p className={styles.empty}>No employees yet.</p>
       ) : (
         <div className={styles.grid}>
-          {employees.map((emp) => (
-            <EmployeeCard
-              key={emp.id}
-              employee={emp}
-              onDelete={handleDelete}
-              onEdit={handleEdit}
-            />
-          ))}
+          {employees
+            .slice()
+            .sort((a, b) => {
+              const roleOrder = { Admin: 0, Chef: 1, Waiter: 2 };
+              return (roleOrder[a.role] ?? 3) - (roleOrder[b.role] ?? 3);
+            })
+            .map((emp) => (
+              <EmployeeCard
+                key={emp.id}
+                employee={emp}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              />
+            ))}
         </div>
       )}
 

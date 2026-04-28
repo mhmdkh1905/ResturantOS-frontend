@@ -10,7 +10,7 @@
 }
 
 .modal {
-  background: #faf9f7;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 24px;
   width: 100%;
@@ -28,13 +28,13 @@
 .modalTitle {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
 }
 
 .closeBtn {
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--page-text-muted);
   cursor: pointer;
   padding: 4px;
   border-radius: 6px;
@@ -42,7 +42,7 @@
   transition: color 0.15s;
 }
 .closeBtn:hover {
-  color: #333;
+  color: var(--page-text);
 }
 
 .form {
@@ -66,16 +66,16 @@
 .label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #555;
+  color: var(--page-text-muted);
 }
 
 .input {
   padding: 9px 12px;
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid var(--card-border);
   border-radius: 9px;
   font-size: 0.875rem;
-  color: #111;
-  background: #fff;
+  color: var(--page-text);
+  background: var(--input-bg);
   outline: none;
   transition: border-color 0.15s;
   width: 100%;
@@ -94,16 +94,16 @@
   flex: 1;
   padding: 11px;
   border-radius: 10px;
-  border: 1.5px solid #e5e5e5;
-  background: #fff;
-  color: #555;
+  border: 1.5px solid var(--card-border);
+  background: var(--input-bg);
+  color: var(--page-text-muted);
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
 }
 .cancelBtn:hover {
-  background: #f5f5f5;
+  background: var(--nav-hover-bg);
 }
 
 .submitBtn {
