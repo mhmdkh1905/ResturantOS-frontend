@@ -120,18 +120,21 @@ export default function Tables() {
         </div>
       ) : (
         <div className={styles.grid}>
-          {tables.map((table) => (
-            <TableCard
-              key={table.id}
-              table={table}
-              onDelete={handleDelete}
-              onStatusChange={handleStatusChange}
-              onEdit={handleEdit}
-              isUpdating={activeEditId === table.id}
-              updateError={activeEditId === table.id ? updateError : null}
-              updateStatusError={updateStatusError}
-            />
-          ))}
+          {tables
+            .slice()
+            .sort((a, b) => a.number - b.number)
+            .map((table) => (
+              <TableCard
+                key={table.id}
+                table={table}
+                onDelete={handleDelete}
+                onStatusChange={handleStatusChange}
+                onEdit={handleEdit}
+                isUpdating={activeEditId === table.id}
+                updateError={activeEditId === table.id ? updateError : null}
+                updateStatusError={updateStatusError}
+              />
+            ))}
         </div>
       )}
 

@@ -1,9 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import {
   getTables,
   createTable,
   deleteTable,
   updateTable,
+  updateTableStatus,
 } from "../api/tables.js";
 
 export const useTables = () => {
@@ -34,7 +36,7 @@ export const useTables = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tables"] }),
   });
 
-  const updateTableStatus = useMutation({
+  const updateStatusMutation = useMutation({
     mutationFn: ({ id, status }) => updateTableStatus(id, status),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tables"] }),
   });
@@ -48,15 +50,16 @@ export const useTables = () => {
     addTable: addMutation.mutate,
     deleteTable: deleteMutation.mutate,
     updateTable: updateMutation.mutate,
-    updateTableStatus: updateTableStatus.mutate,
+    updateTableStatus: updateStatusMutation.mutate,
 
     addError: addMutation.error,
     deleteError: deleteMutation.error,
     updateError: updateMutation.error,
-    updateStatusError: updateTableStatus.error,
+    updateStatusError: updateStatusMutation.error,
+
     addSuccess: addMutation.isSuccess,
     deleteSuccess: deleteMutation.isSuccess,
     updateSuccess: updateMutation.isSuccess,
-    updateStatusSuccess: updateTableStatus.isSuccess,
+    updateStatusSuccess: updateStatusMutation.isSuccess,
   };
 };
