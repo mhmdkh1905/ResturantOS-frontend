@@ -1,7 +1,7 @@
 .card {
   position: relative;
-  background: #ffffff;
-  border: 1.5px solid #eeeeee;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
   border-radius: 16px;
   padding: 20px 16px 16px;
   display: flex;
@@ -68,16 +68,16 @@
 }
 
 .badge_free {
-  background: #dcfce7;
-  color: #16a34a;
+  background: var(--free-status);
+  color: #41a349;
 }
 .badge_reserved {
-  background: #fff3e0;
-  color: #f97316;
+  background: var(--reserved-status);
+  color: #d97707;
 }
 .badge_occupied {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--occupied-status);
+  color: #dc2627;
 }
 
 .statusWrapper {
@@ -116,16 +116,16 @@
 }
 
 .status_free {
-  background: #dcfce7;
-  color: #16a34a;
+  background: var(--free-status);
+  color: #41a349;
 }
 .status_reserved {
-  background: #fff3e0;
-  color: #f97316;
+  background: var(--reserved-status);
+  color: #d97707;
 }
 .status_occupied {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--occupied-status);
+  color: #dc2627;
 }
 
 .chevronOpen {

@@ -71,8 +71,8 @@
   border: 1.5px solid #e5e5e5;
   border-radius: 10px;
   font-size: 0.875rem;
-  color: #111;
-  background: #fff;
+  color: var(--page-text);
+  background: var(--input-bg);
   outline: none;
   transition: border-color 0.15s;
 }
@@ -80,10 +80,9 @@
   border-color: var(--accent);
 }
 
-/* Table */
 .tableWrapper {
-  background: #fff;
-  border: 1.5px solid #eeeeee;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
   border-radius: 14px;
   overflow-x: auto;
 }
@@ -95,7 +94,7 @@
 }
 
 .table thead tr {
-  border-bottom: 1.5px solid #eeeeee;
+  border-bottom: 1.5px solid var(--card-border);
 }
 
 .table th {
@@ -103,7 +102,7 @@
   text-align: left;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #999;
+  color: var(--page-text-muted);
   white-space: nowrap;
 }
 
@@ -117,7 +116,7 @@
 }
 
 .table tbody tr:hover {
-  background: #fafafa;
+  background: var(--row-hover);
 }
 
 .empty {
