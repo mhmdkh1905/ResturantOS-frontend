@@ -54,7 +54,7 @@ export default function MenuItemCard({
         {editing ? (
           <div className={styles.editForm}>
             <input
-              className={styles.input}
+              className={`${styles.input} ${styles.fullWidth}`}
               value={form.name}
               onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
               placeholder="Name"
@@ -79,7 +79,7 @@ export default function MenuItemCard({
               placeholder="Category"
             />
             <input
-              className={styles.input}
+              className={`${styles.input} ${styles.fullWidth}`}
               value={form.image}
               onChange={(e) =>
                 setForm((p) => ({ ...p, image: e.target.value }))
@@ -87,9 +87,9 @@ export default function MenuItemCard({
               placeholder="Image URL"
             />
             {updateError && (
-              <p className={styles.errorText}>{updateError.message}</p>
+              <p className={`${styles.errorText} ${styles.fullWidth}`}>{updateError.message}</p>
             )}
-            <div className={styles.editActions}>
+            <div className={`${styles.editActions} ${styles.fullWidth}`}>
               <button
                 className={`${styles.iconBtn} ${styles.saveBtn}`}
                 onClick={handleSave}

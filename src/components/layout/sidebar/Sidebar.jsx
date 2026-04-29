@@ -13,16 +13,27 @@ import NavItem from "./NavItem.jsx";
 import logo from "../../../assets/logo.png";
 import styles from "./Sidebar.module.css";
 
+const userRole = localStorage.getItem('userRole') || 'admin';
+
 const navLinks = [
   { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard", end: true },
-  { to: "/orders", icon: ShoppingCart, label: "Orders" },
+];
+
+if (['admin', 'waiter'].includes(userRole)) {
+  navLinks.push({ to: "/orders", icon: ShoppingCart, label: "Orders" });
+}
+
+if (['admin', 'chef'].includes(userRole)) {
+  navLinks.push({ to: "/kitchen", icon: ChefHat, label: "Kitchen" });
+}
+
+navLinks.push(
   { to: "/menu", icon: UtensilsCrossed, label: "Menu" },
-  { to: "/kitchen", icon: ChefHat, label: "Kitchen" },
   { to: "/tables", icon: Grid2x2, label: "Tables" },
   { to: "/inventory", icon: Package, label: "Inventory" },
   { to: "/employees", icon: Users, label: "Employees" },
-  { to: "/analytics", icon: BarChart2, label: "Analytics" },
-];
+  { to: "/analytics", icon: BarChart2, label: "Analytics" }
+);
 
 export default function Sidebar({ isOpen, onClose }) {
   return (

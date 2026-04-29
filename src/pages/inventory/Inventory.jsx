@@ -10,17 +10,11 @@ import { useInventory } from "../../hooks/useInventory.js";
 export default function Inventory() {
   const {
     inventory,
-    isLoading,
-    isError,
-    error,
-    addInventoryItem,
-    updateInventoryItem,
-    deleteInventoryItem,
-    addSuccess,
+    addInventoryItemAsync,
+    updateInventoryItemAsync,
+    deleteInventoryItemAsync,
     addError,
-    updateSuccess,
     updateError,
-    deleteSuccess,
     deleteError,
   } = useInventory();
   const [search, setSearch] = useState("");
@@ -35,23 +29,32 @@ export default function Inventory() {
       i.supplier.toLowerCase().includes(search.toLowerCase()),
   );
 
-  const handleAdd = (item) => {
-    addInventoryItem(item);
-    setShowModal(false);
+  const handleAdd = async (item) => {
+    try {
+      await addInventoryItemAsync(item);
+      setShowModal(false);
+      setToast({ message: "Item added successfully!", type: "success" });
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
-  const handleDelete = (id) => {
-    deleteInventoryItem(id);
-
+  const handleDelete = async (id) => {
+    try {
+      await deleteInventoryItemAsync(id);
+      setToast({ message: "Item deleted successfully!", type: "success" });
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
-  const handleEdit = (id, updated) => {
-  
-    updateInventoryItem({ id, data: updated });
-  };
-
-  const showToast = (message, type) => {
-    setToast({ message, type });
+  const handleEdit = async (id, updated) => {
+    try {
+      await updateInventoryItemAsync({ id, data: updated });
+      setToast({ message: "Item updated successfully!", type: "success" });
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
   const hideToast = () => {
@@ -62,20 +65,11 @@ export default function Inventory() {
 
   useEffect(() => {
     if (anyerror) {
-      showToast(anyerror.message || "An error occurred", "error");
+      queueMicrotask(() =>
+        setToast({ message: anyerror.message || "An error occurred", type: "error" })
+      );
     }
   }, [anyerror]);
-
-  const successMessage =
-    (addSuccess && "Item added successfully!") ||
-    (updateSuccess && "Item updated successfully!") ||
-    (deleteSuccess && "Item deleted successfully!");
-
-  useEffect(() => {
-    if (successMessage) {
-      showToast(successMessage, "success");
-    }
-  }, [successMessage]);
 
   return (
     <div className={styles.page}>

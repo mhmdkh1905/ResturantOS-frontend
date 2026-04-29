@@ -4,6 +4,7 @@
   border-radius: 16px;
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.15s ease;
+  min-width: 0;
 }
 
 .card:hover {
@@ -126,8 +127,8 @@
 }
 
 .editForm {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
@@ -141,6 +142,11 @@
   outline: none;
   transition: border-color 0.15s;
   width: 100%;
+  min-width: 0;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
 }
 
 .input:focus {

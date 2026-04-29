@@ -1,13 +1,14 @@
 import api from "../lib/axios.js";
+import { getStatusString } from "../lib/utils.js";
 
 export const getTables = async () => {
   const res = await api.get("/tables");
 
   return res.data.map((table) => ({
     id: table._id,
-    number: table.number,
+    number: table.number ?? table.tableNumber ?? table.tableNo ?? table.table ?? table.index,
     seats: table.capacity,
-    status: table.status.toLowerCase(),
+    status: getStatusString(table.status).toLowerCase(),
   }));
 };
 

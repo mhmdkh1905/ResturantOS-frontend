@@ -15,13 +15,10 @@ export default function Menu() {
     isError,
     error,
     addMenuItemAsync,
-    deleteMenuItem,
-    updateMenuItem,
-    addSuccess,
+    deleteMenuItemAsync,
+    updateMenuItemAsync,
     addError,
-    deleteSuccess,
     deleteError,
-    updateSuccess,
     updateError,
   } = useMenu();
 
@@ -60,36 +57,34 @@ export default function Menu() {
     }
   }, [anyError]);
 
-  const successMessage =
-    (addSuccess && "Menu item added successfully!") ||
-    (deleteSuccess && "Menu item deleted successfully!") ||
-    (updateSuccess && "Menu item updated successfully!");
-
-  useEffect(() => {
-    if (successMessage) {
-      queueMicrotask(() => {
-        setToast({ message: successMessage, type: "success" });
-        if (updateSuccess) setActiveEditId(null);
-      });
-    }
-  }, [successMessage, updateSuccess]);
-
   const handleAdd = async (item) => {
     try {
       await addMenuItemAsync(item);
       setShowModal(false);
+      setToast({ message: "Menu item added successfully!", type: "success" });
     } catch {
       // Error is already handled by the mutation's onError and displayed via toast
     }
   };
 
-  const handleDelete = (id) => {
-    deleteMenuItem(id);
+  const handleDelete = async (id) => {
+    try {
+      await deleteMenuItemAsync(id);
+      setToast({ message: "Menu item deleted successfully!", type: "success" });
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
-  const handleEdit = (id, data) => {
+  const handleEdit = async (id, data) => {
     setActiveEditId(id);
-    updateMenuItem({ id, data });
+    try {
+      await updateMenuItemAsync({ id, data });
+      setToast({ message: "Menu item updated successfully!", type: "success" });
+      setActiveEditId(null);
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
   if (isLoading) return <p className={styles.loading}>Loading menu...</p>;

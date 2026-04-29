@@ -51,8 +51,11 @@ export const useInventory = () => {
     error,
 
     addInventoryItem: addMutation.mutate,
+    addInventoryItemAsync: addMutation.mutateAsync,
     deleteInventoryItem: deleteMutation.mutate,
+    deleteInventoryItemAsync: deleteMutation.mutateAsync,
     updateInventoryItem: updateMutation.mutate,
+    updateInventoryItemAsync: updateMutation.mutateAsync,
     getInventoryByName: getByNameMutation.mutate,
     getInventoryById: getByIdMutation.mutate,
 

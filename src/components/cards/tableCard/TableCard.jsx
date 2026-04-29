@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import { Users, Trash2, ChevronDown, Pencil, Check, X } from "lucide-react";
+import { useState } from "react";
+import { Users, Trash2, Pencil, Check, X } from "lucide-react";
+import { getStatusString } from "../../../lib/utils.js";
 import styles from "./TableCard.module.css";
 
 const STATUS_META = {
@@ -35,24 +36,20 @@ export default function TableCard({
 
   const handleStatusToggle = () => {
     const nextStatus =
-      table.status === "free"
+      safeStatus === "free"
         ? "occupied"
-        : table.status === "occupied"
+        : safeStatus === "occupied"
           ? "reserved"
           : "free";
     onStatusChange(table.id, nextStatus);
   };
 
-  const getNextStatus = (current) => {
-    if (current === "free") return "occupied";
-    if (current === "occupied") return "reserved";
-    return "free";
-  };
-
-  const meta = STATUS_META[table.status];
+  const getStatus = (statusObj) => getStatusString(statusObj, 'free');
+  const safeStatus = getStatus(table.status).toLowerCase();
+  const meta = STATUS_META[safeStatus] || STATUS_META.free;
 
   return (
-    <div className={`${styles.card} ${styles[table.status]}`}>
+  <div className={`${styles.card} ${styles[safeStatus]}`} >
       <div className={styles.actions}>
         <button
           className={styles.iconBtn}
@@ -73,17 +70,17 @@ export default function TableCard({
       </div>
 
       <div
-        className={`${styles.numberBadge} ${styles[`badge_${table.status}`]}`}
+        className={`${styles.numberBadge} ${styles[`badge_${safeStatus}`]}`}
       >
         {table.number}
       </div>
 
       <div className={styles.statusWrapper}>
         <button
-          className={`${styles.statusBadge} ${styles[`status_${table.status}`]}`}
+          className={`${styles.statusBadge} ${styles[`status_${safeStatus}`]}`}
           onClick={handleStatusToggle}
         >
-          <span className={`${styles.dot} ${styles[`dot_${table.status}`]}`} />
+          <span className={`${styles.dot} ${styles[`dot_${safeStatus}`]}`} />
           {meta.label}
         </button>
       </div>
@@ -131,3 +128,4 @@ export default function TableCard({
     </div>
   );
 }
+

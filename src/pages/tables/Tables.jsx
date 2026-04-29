@@ -13,8 +13,8 @@ export default function Tables() {
     tables,
     isLoading,
     addTable,
-    deleteTable,
-    updateTable,
+    deleteTableAsync,
+    updateTableAsync,
     updateTableStatus,
     isError,
     error,
@@ -22,10 +22,6 @@ export default function Tables() {
     deleteError,
     updateError,
     updateStatusError,
-    addSuccess,
-    deleteSuccess,
-    updateSuccess,
-    updateStatusSuccess,
   } = useTables();
   const [showModal, setShowModal] = useState(false);
   const [toast, setToast] = useState(null);
@@ -44,31 +40,9 @@ export default function Tables() {
         message = details.map((e) => e.message).join(", ");
       }
 
-      setToast({
-        message,
-        type: "error",
-      });
+      queueMicrotask(() => setToast({ message, type: "error" }));
     }
   }, [anyError]);
-
-  const successMessage =
-    (addSuccess && "Table added successfully!") ||
-    (deleteSuccess && "Table deleted successfully!") ||
-    (updateSuccess && "Table updated successfully!") ||
-    (updateStatusSuccess && "Table status updated!");
-
-  useEffect(() => {
-    if (successMessage) {
-      setToast({
-        message: successMessage,
-        type: "success",
-      });
-
-      if (updateSuccess) {
-        setActiveEditId(null);
-      }
-    }
-  }, [successMessage, updateSuccess]);
 
   const freeCount = tables.filter((t) => t.status === "free").length;
   const occupiedCount = tables.filter((t) => t.status === "occupied").length;
@@ -77,19 +51,32 @@ export default function Tables() {
   const handleAdd = ({ number, seats }) => {
     addTable({ number, seats });
     setShowModal(false);
+    setToast({ message: "Table added successfully!", type: "success" });
   };
 
-  const handleDelete = (id) => {
-    deleteTable(id);
+  const handleDelete = async (id) => {
+    try {
+      await deleteTableAsync(id);
+      setToast({ message: "Table deleted successfully!", type: "success" });
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
   const handleStatusChange = (id, status) => {
     updateTableStatus({ id, status });
+    setToast({ message: "Table status updated!", type: "success" });
   };
 
-  const handleEdit = (id, seats) => {
+  const handleEdit = async (id, seats) => {
     setActiveEditId(id);
-    updateTable({ id, data: { seats } });
+    try {
+      await updateTableAsync({ id, data: { seats } });
+      setToast({ message: "Table updated successfully!", type: "success" });
+      setActiveEditId(null);
+    } catch {
+      // Error is already handled by the mutation's onError and displayed via toast
+    }
   };
 
   if (isLoading) return <p className={styles.loading}>Loading tables...</p>;

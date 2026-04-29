@@ -34,10 +34,12 @@ export default function TableCard({ table, onDelete, onStatusChange, onEdit }) {
     setEditing(false);
   };
 
-  const meta = STATUS_META[table.status];
+const getStatus = (statusObj) => statusObj?.name || statusObj || 'free';
+const safeStatus = getStatus(table.status);
+const meta = STATUS_META[safeStatus] || STATUS_META.free;
 
   return (
-    <div className={`${styles.card} ${styles[table.status]}`}>
+  <div className={`${styles.card} ${styles[safeStatus]}`} >
       <div className={styles.actions}>
         <button
           className={styles.iconBtn}

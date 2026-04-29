@@ -11,15 +11,16 @@ import Employees from "../pages/employees/Employees.jsx";
 import Analytics from "../pages/analytics/Analytics.jsx";
 import Settings from "../pages/settings/Settings.jsx";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
       { path: "dashboard", element: <Dashboard /> },
-      { path: "orders", element: <Orders /> },
+{ path: "orders", element: <Orders /> },
       { path: "menu", element: <Menu /> },
-      { path: "kitchen", element: <Kitchen /> },
+{ path: "kitchen", element: <Kitchen /> },
       { path: "tables", element: <Tables /> },
       { path: "inventory", element: <Inventory /> },
       { path: "employees", element: <Employees /> },
