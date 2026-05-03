@@ -4,23 +4,20 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 api.interceptors.response.use(
-  (response) => {
-    if (!response.data.success) {
-      return Promise.reject(response.data);
-    }
-
-    return response.data;
-  },
+  (response) => response,
   (error) => {
-    if (error.response && error.response.data) {
-      return Promise.reject(error.response.data);
-    }
-
-    return Promise.reject({
-      message: "Network error",
-      error: { details: error.message },
-    });
+    return Promise.reject(error.response?.data || { message: "Network error" });
   },
 );
 

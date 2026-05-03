@@ -5,7 +5,9 @@ import ToggleRow from "../../components/rows/toggleRow/ToggleRow.jsx";
 import SelectRow from "../../components/rows/selectRow/SelectRow.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../../store/themeSlice";
+import { logout } from "../../utils/auth.js";
 import styles from "./Settings.module.css";
+import { useNavigate } from "react-router-dom";
 
 const LANGUAGES = [
   { value: "en", label: "English", flag: "🇺🇸" },
@@ -24,9 +26,11 @@ export default function Settings() {
 
   const [language, setLanguage] = useState("en");
 
+  const navigate = useNavigate();
+
   const handleSignOut = () => {
-    //  auth logic
-    alert("Signed out");
+    logout();
+    navigate("/login");
   };
 
   return (

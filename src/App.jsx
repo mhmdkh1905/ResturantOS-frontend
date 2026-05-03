@@ -5,10 +5,8 @@ import router from "./router/router.jsx";
 
 function App() {
   const theme = useSelector((state) => state.theme.theme);
-  console.log("Current theme:", theme);
 
   useEffect(() => {
-    console.log("Setting data-theme to:", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
