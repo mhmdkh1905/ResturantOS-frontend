@@ -1,0 +1,182 @@
+.page {
+  min-height: 100vh;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1.5px solid #eeeeee;
+  border-radius: 20px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.07);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  background: #f97316;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #888;
+  margin-bottom: 28px;
+}
+
+.error {
+  background: #fff5f5;
+  border: 1.5px solid #fecaca;
+  color: #e53e3e;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 9px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  color: #bbb;
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding: 11px 12px 11px 36px;
+  border: 1.5px solid #e5e5e5;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  color: #111;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus {
+  border-color: #f97316;
+}
+
+/* Select doesn't need left padding for icon */
+.select {
+  padding-left: 12px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23aaa'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.eyeBtn:hover {
+  color: #555;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 11px;
+  border: none;
+  background: #f97316;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+}
+.submitBtn:hover {
+  background: #ea6c0a;
+}
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+.switchText {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: 24px;
+}
+
+.switchLink {
+  color: #f97316;
+  font-weight: 600;
+  text-decoration: none;
+}
+.switchLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 32px 20px;
+  }
+}
