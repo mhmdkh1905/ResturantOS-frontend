@@ -2,7 +2,10 @@ import api from "../lib/axios.js";
 
 export const getInventory = async () => {
   const res = await api.get("/inventory");
-  return res.data.map((item) => ({
+
+  const inventories = res.data.data;
+
+  return inventories.map((item) => ({
     id: item._id,
     name: item.ingredientName,
     quantity: item.quantity,

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../hooks/useAuth";
+import { getUser } from "../../utils/auth.js";
 import styles from "./Login.module.css";
 
 export default function Login() {
@@ -35,7 +36,17 @@ export default function Login() {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      navigate("/dashboard");
+      const role = user?.role;
+
+      if (role === "admin") {
+        navigate("/dashboard");
+      } else {
+        if (role === "chef") {
+          navigate("/kitchen");
+        } else {
+          navigate("/orders");
+        }
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
     }

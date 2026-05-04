@@ -10,8 +10,8 @@
 }
 
 .card {
-  background: #ffffff;
-  border: 1.5px solid #eeeeee;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
   border-radius: 16px;
   padding: 8px 0;
   max-width: 720px;
@@ -21,6 +21,7 @@
   height: 1px;
   background: #f0f0f0;
   margin: 4px 0;
+  background: var(--card-border);
 }
 
 .signOutBtn {
@@ -29,10 +30,10 @@
   gap: 8px;
   margin: 12px 24px;
   padding: 8px 16px;
-  border: 1.5px solid #fecaca;
+  border: 1.5px solid var(--signout-button-border);
   border-radius: 9px;
-  background: #fff;
-  color: #e53e3e;
+  background: var(--signout-button-bg);
+  color: var(----signout-button-text);
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
@@ -41,6 +42,7 @@
     border-color 0.15s;
 }
 .signOutBtn:hover {
-  background: #fff5f5;
-  border-color: #e53e3e;
+  background: var(--signout-button-bg-hover);
+  color: var(--signout-button-text-hover);
+  border-color: var(--signout-button-border-hover);
 }

@@ -8,6 +8,7 @@ const EMPTY = {
   role: "Waiter",
   phoneNumber: "",
   email: "",
+  password: "",
   workedHours: "",
   salaryPerHour: "",
 };
@@ -23,6 +24,7 @@ export default function AddEmployeeModal({ onAdd, onClose }) {
       role: form.role,
       phoneNumber: form.phoneNumber,
       email: form.email,
+      password: form.password,
       workedHours: Number(form.workedHours),
       salaryPerHour: Number(form.salaryPerHour),
     });
@@ -79,6 +81,16 @@ export default function AddEmployeeModal({ onAdd, onClose }) {
                 type="email"
                 value={form.email}
                 onChange={(e) => set("email", e.target.value)}
+              />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.label}>Password</label>
+              <input
+                className={styles.input}
+                type="password"
+                required
+                value={form.password}
+                onChange={(e) => set("password", e.target.value)}
               />
             </div>
           </div>

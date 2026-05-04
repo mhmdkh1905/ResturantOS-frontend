@@ -12,12 +12,12 @@ import {
 } from "lucide-react";
 import styles from "./EmployeeCard.module.css";
 
-const ROLES = ["Admin", "Chef", "Waiter"];
+const ROLES = ["admin", "chef", "waiter"];
 
 const ROLE_COLORS = {
-  Admin: styles.roleAdmin,
-  Chef: styles.roleChef,
-  Waiter: styles.roleWaiter,
+  admin: styles.roleAdmin,
+  chef: styles.roleChef,
+  waiter: styles.roleWaiter,
 };
 
 export default function EmployeeCard({ employee: emp, onDelete, onEdit }) {

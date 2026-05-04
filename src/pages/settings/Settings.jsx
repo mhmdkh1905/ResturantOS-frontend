@@ -9,15 +9,6 @@ import { logout } from "../../utils/auth.js";
 import styles from "./Settings.module.css";
 import { useNavigate } from "react-router-dom";
 
-const LANGUAGES = [
-  { value: "en", label: "English", flag: "🇺🇸" },
-  { value: "ar", label: "Arabic", flag: "🇸🇦" },
-  { value: "fr", label: "French", flag: "🇫🇷" },
-  { value: "es", label: "Spanish", flag: "🇪🇸" },
-  { value: "de", label: "German", flag: "🇩🇪" },
-  { value: "he", label: "Hebrew", flag: "🇮🇱" },
-];
-
 export default function Settings() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
@@ -45,19 +36,6 @@ export default function Settings() {
             description="Toggle dark/light theme"
             checked={darkMode}
             onChange={(val) => dispatch(setTheme(val ? "dark" : "light"))}
-          />
-        </SettingsSection>
-
-        <div className={styles.divider} />
-
-        <SettingsSection label="Language">
-          <SelectRow
-            icon={<Globe size={18} />}
-            label="Display Language"
-            description="Choose your preferred language"
-            value={language}
-            onChange={setLanguage}
-            options={LANGUAGES}
           />
         </SettingsSection>
 

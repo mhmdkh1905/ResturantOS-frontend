@@ -10,21 +10,48 @@ import {
   Settings,
 } from "lucide-react";
 import NavItem from "./NavItem.jsx";
+import { getUser } from "../../../utils/auth.js";
 import logo from "../../../assets/logo.png";
 import styles from "./Sidebar.module.css";
 
 const navLinks = [
-  { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard", end: true },
-  { to: "/orders", icon: ShoppingCart, label: "Orders" },
-  { to: "/menu", icon: UtensilsCrossed, label: "Menu" },
-  { to: "/kitchen", icon: ChefHat, label: "Kitchen" },
-  { to: "/tables", icon: Grid2x2, label: "Tables" },
-  { to: "/inventory", icon: Package, label: "Inventory" },
-  { to: "/employees", icon: Users, label: "Employees" },
-  { to: "/analytics", icon: BarChart2, label: "Analytics" },
+  {
+    to: "/dashboard",
+    icon: LayoutDashboard,
+    label: "Dashboard",
+    roles: ["admin"],
+    end: true,
+  },
+  {
+    to: "/orders",
+    icon: ShoppingCart,
+    roles: ["admin", "waiter"],
+    label: "Orders",
+  },
+  {
+    to: "/menu",
+    icon: UtensilsCrossed,
+    roles: ["admin", "waiter"],
+    label: "Menu",
+  },
+  { to: "/kitchen", icon: ChefHat, roles: ["admin", "chef"], label: "Kitchen" },
+  { to: "/tables", icon: Grid2x2, roles: ["admin", "waiter"], label: "Tables" },
+  {
+    to: "/inventory",
+    icon: Package,
+    roles: ["admin", "chef"],
+    label: "Inventory",
+  },
+  { to: "/employees", icon: Users, roles: ["admin"], label: "Employees" },
+  { to: "/analytics", icon: BarChart2, roles: ["admin"], label: "Analytics" },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
+  const user = getUser();
+  const role = user?.role;
+
+  const filteredLinks = navLinks.filter((item) => item.roles.includes(role));
+
   return (
     <>
       {isOpen && <div className={styles.overlay} onClick={onClose} />}
@@ -36,7 +63,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         <nav className={styles.nav}>
-          {navLinks.map((item) => (
+          {filteredLinks.map((item) => (
             <NavItem key={item.to} {...item} />
           ))}
         </nav>

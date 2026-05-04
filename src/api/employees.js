@@ -2,7 +2,10 @@ import api from "../lib/axios.js";
 
 export const getEmployees = async () => {
   const res = await api.get("/employees");
-  return res.data.map((employee) => ({
+
+  const employees = res.data.data;
+
+  return employees.map((employee) => ({
     id: employee._id,
     name: employee.name,
     role: employee.role,
@@ -17,9 +20,10 @@ export const getEmployees = async () => {
 export const createEmployee = async (data) => {
   const res = await api.post("/employees", {
     name: data.name,
-    role: data.role,
+    role: data.role.toLowerCase(),
     phoneNumber: data.phoneNumber,
     email: data.email,
+    password: data.password,
     salaryPerHour: data.salaryPerHour,
     workedHours: data.workedHours,
   });

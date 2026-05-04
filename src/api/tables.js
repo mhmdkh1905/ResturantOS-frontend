@@ -3,7 +3,9 @@ import api from "../lib/axios.js";
 export const getTables = async () => {
   const res = await api.get("/tables");
 
-  return res.data.map((table) => ({
+  const tables = res.data.data;
+
+  return tables.map((table) => ({
     id: table._id,
     number: table.number,
     seats: table.capacity,
