@@ -36,6 +36,7 @@ export function useOrders() {
   }, [fetchOrders]);
 
   const updateStatus = async (orderId, status) => {
+    const prevOrders = orders;
     try {
       // Optimistic update
       setOrders((prev) =>
@@ -44,10 +45,10 @@ export function useOrders() {
         ),
       );
       await updateOrderStatus(orderId, status);
-      await refetch();
     } catch (err) {
       setError(err.message);
-      refetch();
+      // Rollback optimistic update (avoid full refetch/refresh)
+      setOrders(prevOrders);
     }
   };
 
