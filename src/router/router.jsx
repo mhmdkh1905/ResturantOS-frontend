@@ -45,15 +45,15 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         element: <Dashboard />,
       },
       {
-        path: "orders",
+        path: "/orders",
         element: <Orders />,
       },
       {
-        path: "menu",
+        path: "/menu",
         element: (
           <AdminWaiterRoute>
             <Menu />
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "kitchen",
+        path: "/kitchen",
         element: (
           <AdminChefRoute>
             <Kitchen />
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "tables",
+        path: "/tables",
         element: (
           <AdminWaiterRoute>
             <Tables />
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "inventory",
+        path: "/inventory",
         element: (
           <AdminChefRoute>
             <Inventory />
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "employees",
+        path: "/employees",
         element: (
           <AdminRoute>
             <Employees />
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "settings",
+        path: "/settings",
         element: <Settings />,
       },
     ],

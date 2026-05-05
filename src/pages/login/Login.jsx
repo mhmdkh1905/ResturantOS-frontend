@@ -39,12 +39,12 @@ export default function Login() {
       const role = user?.role;
 
       if (role === "admin") {
-        navigate("/dashboard");
+        navigate("/app/dashboard");
       } else {
         if (role === "chef") {
-          navigate("/kitchen");
+          navigate("/app/kitchen");
         } else {
-          navigate("/orders");
+          navigate("/app/orders");
         }
       }
     } catch (err) {
