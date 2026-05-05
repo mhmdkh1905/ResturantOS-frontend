@@ -15,43 +15,33 @@ import styles from "./Sidebar.module.css";
 
 const navLinks = [
   {
-    to: "/app/dashboard",
+    to: "/dashboard",
     icon: LayoutDashboard,
     label: "Dashboard",
     roles: ["admin"],
     end: true,
   },
   {
-    to: "/app/orders",
+    to: "/orders",
     icon: ShoppingCart,
     roles: ["admin", "waiter"],
     label: "Orders",
   },
   {
-    to: "/app/menu",
+    to: "/menu",
     icon: UtensilsCrossed,
     roles: ["admin", "waiter"],
     label: "Menu",
   },
+  { to: "/kitchen", icon: ChefHat, roles: ["admin", "chef"], label: "Kitchen" },
+  { to: "/tables", icon: Grid2x2, roles: ["admin", "waiter"], label: "Tables" },
   {
-    to: "/app/kitchen",
-    icon: ChefHat,
-    roles: ["admin", "chef"],
-    label: "Kitchen",
-  },
-  {
-    to: "/app/tables",
-    icon: Grid2x2,
-    roles: ["admin", "waiter"],
-    label: "Tables",
-  },
-  {
-    to: "/app/inventory",
+    to: "/inventory",
     icon: Package,
     roles: ["admin", "chef"],
     label: "Inventory",
   },
-  { to: "/app/employees", icon: Users, roles: ["admin"], label: "Employees" },
+  { to: "/employees", icon: Users, roles: ["admin"], label: "Employees" },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
