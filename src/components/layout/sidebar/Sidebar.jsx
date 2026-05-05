@@ -6,7 +6,6 @@ import {
   Grid2x2,
   Package,
   Users,
-  BarChart2,
   Settings,
 } from "lucide-react";
 import NavItem from "./NavItem.jsx";
@@ -43,7 +42,6 @@ const navLinks = [
     label: "Inventory",
   },
   { to: "/employees", icon: Users, roles: ["admin"], label: "Employees" },
-  { to: "/analytics", icon: BarChart2, roles: ["admin"], label: "Analytics" },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {

@@ -64,17 +64,17 @@
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #aaa;
+  color: var(--input-placeholder);
 }
 
 .searchInput {
   width: 100%;
   padding: 9px 12px 9px 34px;
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid var(--border);
   border-radius: 10px;
   font-size: 0.875rem;
-  color: #111;
-  background: #fff;
+  color: var(--input-text);
+  background: var(--input-bg);
   outline: none;
   transition: border-color 0.15s;
 }
@@ -91,9 +91,9 @@
 .tab {
   padding: 7px 16px;
   border-radius: 20px;
-  border: 1.5px solid #e5e5e5;
-  background: #fff;
-  color: #666;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--page-text-muted);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;

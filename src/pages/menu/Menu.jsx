@@ -37,17 +37,22 @@ export default function Menu() {
   const [activeEditId, setActiveEditId] = useState(null);
 
   const categories = useMemo(() => {
-    const unique = [...new Set(menuItems.map((i) => i.category))];
+    const unique = [
+      ...new Set(menuItems.map((i) => i.category).filter(Boolean)),
+    ];
     return ["All", ...unique.filter((c) => c !== "All")];
   }, [menuItems]);
 
   const filteredItems = useMemo(() => {
+    const query = search.toLowerCase();
     return menuItems.filter((item) => {
+      const name = item.name || "";
+      const category = item.category || "";
       const matchesSearch =
-        item.name.toLowerCase().includes(search.toLowerCase()) ||
-        item.category.toLowerCase().includes(search.toLowerCase());
+        name.toLowerCase().includes(query) ||
+        category.toLowerCase().includes(query);
       const matchesCategory =
-        activeCategory === "All" || item.category === activeCategory;
+        activeCategory === "All" || category === activeCategory;
       return matchesSearch && matchesCategory;
     });
   }, [menuItems, search, activeCategory]);
@@ -70,18 +75,14 @@ export default function Menu() {
       await addMenuItemAsync(item);
       setShowModal(false);
       setToast({ message: "Menu item added successfully!", type: "success" });
-    } catch {
-      // Error is already handled by the mutation's onError and displayed via toast
-    }
+    } catch {}
   };
 
   const handleDelete = async (id) => {
     try {
       await deleteMenuItemAsync(id);
       setToast({ message: "Menu item deleted successfully!", type: "success" });
-    } catch {
-      // Error is already handled by the mutation's onError and displayed via toast
-    }
+    } catch {}
   };
 
   const handleEdit = async (id, data) => {
@@ -90,9 +91,7 @@ export default function Menu() {
       await updateMenuItemAsync({ id, data });
       setToast({ message: "Menu item updated successfully!", type: "success" });
       setActiveEditId(null);
-    } catch {
-      // Error is already handled by the mutation's onError and displayed via toast
-    }
+    } catch {}
   };
 
   if (isLoading) return <p className={styles.loading}>Loading menu...</p>;
@@ -147,12 +146,14 @@ export default function Menu() {
         <div className={styles.grid}>
           {filteredItems.map((item) => (
             <MenuItemCard
-              key={item._id}
+              key={item._id || item.id}
               item={item}
               onDelete={handleDelete}
               onEdit={handleEdit}
-              isUpdating={activeEditId === item._id}
-              updateError={activeEditId === item._id ? updateError : null}
+              isUpdating={activeEditId === (item._id || item.id)}
+              updateError={
+                activeEditId === (item._id || item.id) ? updateError : null
+              }
             />
           ))}
         </div>

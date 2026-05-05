@@ -27,13 +27,15 @@ export default function Inventory() {
   const [showModal, setShowModal] = useState(false);
   const [toast, setToast] = useState(null);
 
-  const lowStockCount = inventory.filter((i) => i.isLowStock).length;
+  const lowStockCount = inventory.filter((i) => i?.isLowStock).length;
 
-  const filtered = inventory.filter(
-    (i) =>
-      i.name.toLowerCase().includes(search.toLowerCase()) ||
-      i.supplier.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filtered = inventory.filter((i) => {
+    const name = (i.ingredientName || "").toLowerCase();
+    const supplier = (i.supplier || "").toLowerCase();
+    const q = search.toLowerCase();
+
+    return name.includes(q) || supplier.includes(q);
+  });
 
   const handleAdd = (item) => {
     addInventoryItem(item);
@@ -130,7 +132,7 @@ export default function Inventory() {
           <tbody>
             {filtered.map((item) => (
               <InventoryRow
-                key={item.id}
+                key={item._id}
                 item={item}
                 onDelete={handleDelete}
                 onEdit={handleEdit}

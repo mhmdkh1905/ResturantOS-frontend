@@ -6,8 +6,8 @@ export const getInventory = async () => {
   const inventories = res.data.data;
 
   return inventories.map((item) => ({
-    id: item._id,
-    name: item.ingredientName,
+    _id: item._id,
+    ingredientName: item.ingredientName,
     quantity: item.quantity,
     unit: item.unit,
     minThreshold: item.minThreshold,
@@ -31,12 +31,16 @@ export const createInventoryItem = async (data) => {
 
 export const updateInventoryItem = async (id, data) => {
   const payload = {
-    ...(data.ingredientName && { ingredientName: data.ingredientName }),
-    ...(data.quantity && { quantity: data.quantity }),
-    ...(data.unit && { unit: data.unit }),
-    ...(data.minThreshold && { minThreshold: data.minThreshold }),
-    ...(data.costPerUnit && { costPerUnit: data.costPerUnit }),
-    ...(data.supplier && { supplier: data.supplier }),
+    ...(data.ingredientName !== undefined && {
+      ingredientName: data.ingredientName,
+    }),
+    ...(data.quantity !== undefined && { quantity: data.quantity }),
+    ...(data.unit !== undefined && { unit: data.unit }),
+    ...(data.minThreshold !== undefined && {
+      minThreshold: data.minThreshold,
+    }),
+    ...(data.costPerUnit !== undefined && { costPerUnit: data.costPerUnit }),
+    ...(data.supplier !== undefined && { supplier: data.supplier }),
   };
   const res = await api.put(`/inventory/${id}`, payload);
 
@@ -51,8 +55,8 @@ export const deleteInventoryItem = async (id) => {
 export const getInventoryByName = async (name) => {
   const res = await api.get(`/inventory/name/${name}`);
   return res.data.map((item) => ({
-    id: item._id,
-    name: item.ingredientName,
+    _id: item._id,
+    ingredientName: item.ingredientName,
     quantity: item.quantity,
     unit: item.unit,
     minThreshold: item.minThreshold,
@@ -66,8 +70,8 @@ export const getInventoryById = async (id) => {
   const res = await api.get(`/inventory/${id}`);
   const item = res.data;
   return {
-    id: item._id,
-    name: item.ingredientName,
+    _id: item._id,
+    ingredientName: item.ingredientName,
     quantity: item.quantity,
     unit: item.unit,
     minThreshold: item.minThreshold,

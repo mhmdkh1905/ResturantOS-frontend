@@ -14,7 +14,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   transform: translateY(-2px);
 }
 
@@ -29,7 +29,7 @@
 .iconBtn {
   background: none;
   border: none;
-  color: #ccc;
+  color: var(--page-text-muted);
   cursor: pointer;
   padding: 4px;
   border-radius: 6px;
@@ -40,20 +40,20 @@
     background 0.15s;
 }
 .iconBtn:hover {
-  color: #555;
-  background: #f0f0f0;
+  color: var(--page-text-muted);
+  background: var(--surface-2);
 }
 .deleteBtn:hover {
   color: #e53e3e !important;
-  background: #fff0f0 !important;
+  background: var(--danger-bg) !important;
 }
 .saveBtn:hover {
   color: #16a34a !important;
-  background: #dcfce7 !important;
+  background: var(--success-bg) !important;
 }
 .cancelBtn:hover {
   color: #e53e3e !important;
-  background: #fff0f0 !important;
+  background: var(--danger-bg) !important;
 }
 
 .numberBadge {
@@ -69,15 +69,15 @@
 
 .badge_free {
   background: var(--free-status);
-  color: #41a349;
+  color: var(--free-status-text);
 }
 .badge_reserved {
   background: var(--reserved-status);
-  color: #d97707;
+  color: var(--reserved-status-text);
 }
 .badge_occupied {
   background: var(--occupied-status);
-  color: #dc2627;
+  color: var(--occupied-status-text);
 }
 
 .statusWrapper {
@@ -90,10 +90,10 @@
   top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  background: #ffffff;
-  border: 1px solid #eeeeee;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
   z-index: 9999;
   overflow: hidden;
   min-width: 130px;
@@ -117,15 +117,15 @@
 
 .status_free {
   background: var(--free-status);
-  color: #41a349;
+  color: var(--free-status-text);
 }
 .status_reserved {
   background: var(--reserved-status);
-  color: #d97707;
+  color: var(--reserved-status-text);
 }
 .status_occupied {
   background: var(--occupied-status);
-  color: #dc2627;
+  color: var(--occupied-status-text);
 }
 
 .chevronOpen {
@@ -142,16 +142,16 @@
   border: none;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #444;
+  color: var(--page-text);
   cursor: pointer;
   transition: background 0.15s;
 }
 .dropdownItem:hover {
-  background: #f9f9f9;
+  background: var(--surface-2);
 }
 .dropdownActive {
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
 }
 
 .dot {
@@ -175,14 +175,14 @@
   align-items: center;
   gap: 5px;
   font-size: 0.8rem;
-  color: #999;
+  color: var(--page-text-muted);
 }
 
 .editRow {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #999;
+  color: var(--page-text-muted);
   font-size: 0.8rem;
 }
 
@@ -192,7 +192,8 @@
   border: 1.5px solid var(--accent);
   border-radius: 6px;
   font-size: 0.8rem;
-  color: #111;
+  color: var(--input-text);
+  background: var(--input-bg);
   outline: none;
   text-align: center;
 }

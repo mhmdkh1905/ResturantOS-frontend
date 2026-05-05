@@ -37,14 +37,14 @@ export default function Register() {
       return;
     }
 
-    // wire your auth here
+    
     navigate("/");
   };
 
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        {/* Logo */}
+        
         <div className={styles.logo}>
           <div className={styles.logoIcon}>
             <Flame size={22} color="#fff" />
@@ -58,7 +58,7 @@ export default function Register() {
         {error && <div className={styles.error}>{error}</div>}
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Name */}
+          
           <div className={styles.field}>
             <label className={styles.label}>Full Name</label>
             <div className={styles.inputWrapper}>
@@ -74,7 +74,7 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Email */}
+         
           <div className={styles.field}>
             <label className={styles.label}>Email</label>
             <div className={styles.inputWrapper}>
@@ -90,7 +90,6 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Role */}
           <div className={styles.field}>
             <label className={styles.label}>Role</label>
             <select
@@ -129,7 +128,7 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Confirm Password */}
+         
           <div className={styles.field}>
             <label className={styles.label}>Confirm Password</label>
             <div className={styles.inputWrapper}>

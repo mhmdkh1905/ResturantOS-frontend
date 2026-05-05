@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, Plus, Trash2 } from "lucide-react";
+import { useInventory } from "../../../hooks/useInventory";
 import styles from "./AddMenuItemModal.module.css";
 
 const CATEGORIES = [
@@ -10,7 +11,6 @@ const CATEGORIES = [
   "Salad",
   "Soup",
 ];
-const UNITS = ["piece", "kg", "g", "liter", "ml", "cup", "tbsp", "tsp"];
 
 const EMPTY = {
   name: "",
@@ -22,12 +22,13 @@ const EMPTY = {
 };
 
 const EMPTY_INGREDIENT = {
-  ingredientName: "",
+  ingredientId: "",
   quantity: "",
-  unit: "g",
 };
 
 export default function AddMenuItemModal({ onAdd, onClose }) {
+  const { inventory } = useInventory();
+  console.log("inventory:", inventory);
   const [form, setForm] = useState(EMPTY);
 
   const set = (key, val) => setForm((p) => ({ ...p, [key]: val }));
@@ -63,12 +64,11 @@ export default function AddMenuItemModal({ onAdd, onClose }) {
       price: Number(form.price),
       category: form.category,
       image: form.image.trim(),
-      recipe: form.recipe
-        .filter((ing) => ing.ingredientName.trim() && ing.quantity !== "")
+      ingredients: form.recipe
+        .filter((ing) => ing.ingredientId && ing.quantity)
         .map((ing) => ({
-          ingredientName: ing.ingredientName.trim(),
+          ingredientId: ing.ingredientId,
           quantity: Number(ing.quantity),
-          unit: ing.unit,
         })),
       isAvailable: form.isAvailable,
     });
@@ -155,15 +155,20 @@ export default function AddMenuItemModal({ onAdd, onClose }) {
 
             {form.recipe.map((ing, idx) => (
               <div key={idx} className={styles.recipeRow}>
-                <input
+                <select
                   className={styles.input}
-                  placeholder="Ingredient name"
-                  required
-                  value={ing.ingredientName}
+                  value={ing.ingredientId}
                   onChange={(e) =>
-                    setIngredient(idx, "ingredientName", e.target.value)
+                    setIngredient(idx, "ingredientId", e.target.value)
                   }
-                />
+                >
+                  <option value="">Select ingredient</option>
+                  {inventory.map((inv) => (
+                    <option key={inv._id} value={inv._id}>
+                      {inv.ingredientName}
+                    </option>
+                  ))}
+                </select>
                 <input
                   className={styles.input}
                   type="number"
@@ -176,17 +181,6 @@ export default function AddMenuItemModal({ onAdd, onClose }) {
                     setIngredient(idx, "quantity", e.target.value)
                   }
                 />
-                <select
-                  className={styles.input}
-                  value={ing.unit}
-                  onChange={(e) => setIngredient(idx, "unit", e.target.value)}
-                >
-                  {UNITS.map((u) => (
-                    <option key={u} value={u}>
-                      {u}
-                    </option>
-                  ))}
-                </select>
                 <button
                   type="button"
                   className={`${styles.iconBtn} ${styles.deleteBtn}`}

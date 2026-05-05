@@ -13,8 +13,8 @@ export default function InventoryRow({ item, onDelete, onEdit }) {
   const stockPct = Math.min((item.quantity / item.minThreshold) * 100, 100);
 
   const handleSave = () => {
-    onEdit(item.id, {
-      name: form.name,
+    onEdit(item._id, {
+      ingredientName: form.ingredientName,
       quantity: Number(form.quantity),
       unit: form.unit,
       minThreshold: Number(form.minThreshold),
@@ -42,7 +42,7 @@ export default function InventoryRow({ item, onDelete, onEdit }) {
   if (editing) {
     return (
       <tr className={styles.editingRow}>
-        <td>{field("name", "text", "120px")}</td>
+        <td>{field("ingredientName", "text", "120px")}</td>
         <td>{field("quantity", "number", "60px")}</td>
         <td>
           <select
@@ -84,7 +84,9 @@ export default function InventoryRow({ item, onDelete, onEdit }) {
     <tr>
       <td className={styles.nameCell}>
         {isLow && <AlertTriangle size={13} className={styles.warnIcon} />}
-        <span className={isLow ? styles.lowName : ""}>{item.name}</span>
+        <span className={isLow ? styles.lowName : ""}>
+          {item.ingredientName}
+        </span>
       </td>
       <td className={isLow ? styles.lowQty : styles.qty}>{item.quantity}</td>
       <td className={styles.muted}>{item.unit}</td>
@@ -109,7 +111,7 @@ export default function InventoryRow({ item, onDelete, onEdit }) {
           </button>
           <button
             className={`${styles.btn} ${styles.deleteBtn}`}
-            onClick={() => onDelete(item.id)}
+            onClick={() => onDelete(item._id)}
           >
             <Trash2 size={14} />
           </button>

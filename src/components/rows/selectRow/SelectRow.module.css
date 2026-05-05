@@ -13,7 +13,7 @@
 }
 
 .icon {
-  color: #888;
+  color: var(--page-text-muted);
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -22,21 +22,21 @@
 .label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #111;
+  color: var(--page-text);
   margin-bottom: 2px;
 }
 
 .description {
   font-size: 0.78rem;
-  color: #999;
+  color: var(--page-text-muted);
 }
 
 .selectWrapper {
   position: relative;
   display: flex;
   align-items: center;
-  background: #fff;
-  border: 1.5px solid #e5e5e5;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
   border-radius: 9px;
   padding: 7px 32px 7px 10px;
   gap: 6px;
@@ -60,7 +60,7 @@
   background: transparent;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #111;
+  color: var(--input-text);
   cursor: pointer;
   appearance: none;
   width: 100%;
@@ -73,6 +73,6 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  color: #aaa;
+  color: var(--input-placeholder);
   pointer-events: none;
 }

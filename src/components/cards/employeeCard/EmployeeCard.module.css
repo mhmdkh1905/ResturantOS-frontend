@@ -12,7 +12,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-sm);
   transform: translateY(-2px);
 }
 
@@ -32,7 +32,7 @@
   height: 42px;
   border-radius: 12px;
   background: var(--profile-pic-placeholder-bg);
-  color: #f07418;
+  color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,19 +67,19 @@
 
 .roleAdmin {
   background: var(--role-manager);
-  color: #2d63eb;
+  color: var(--role-manager-text);
 }
 .roleChef {
   background: var(--role-chef);
-  color: #d97707;
+  color: var(--role-chef-text);
 }
 .roleWaiter {
   background: var(--role-waiter);
-  color: #51b167;
+  color: var(--role-waiter-text);
 }
 .roleDefault {
-  background: #f1f5f9;
-  color: #64748b;
+  background: var(--surface-2);
+  color: var(--page-text-muted);
 }
 
 .cardActions {
@@ -107,16 +107,16 @@
   background: var(--nav-hover-bg);
 }
 .deleteBtn:hover {
-  color: #e53e3e;
-  background: #fff0f0;
+  color: var(--danger);
+  background: var(--danger-bg);
 }
 .saveBtn:hover {
-  color: #16a34a;
-  background: #dcfce7;
+  color: var(--success);
+  background: var(--success-bg);
 }
 .cancelBtn:hover {
-  color: #e53e3e;
-  background: #fff0f0;
+  color: var(--danger);
+  background: var(--danger-bg);
 }
 
 .info {
@@ -134,7 +134,7 @@
 }
 
 .infoIcon {
-  color: #aaa;
+  color: var(--page-text-muted);
   flex-shrink: 0;
 }
 
@@ -147,7 +147,7 @@
 .editLabel {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #888;
+  color: var(--page-text-muted);
   margin-top: 4px;
 }
 

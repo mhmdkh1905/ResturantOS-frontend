@@ -38,7 +38,7 @@ export function useOrders() {
   const updateStatus = async (orderId, status) => {
     const prevOrders = orders;
     try {
-      // Optimistic update
+     
       setOrders((prev) =>
         prev.map((o) =>
           o.id === orderId ? { ...o, status: status.toLowerCase() } : o,
@@ -47,14 +47,14 @@ export function useOrders() {
       await updateOrderStatus(orderId, status);
     } catch (err) {
       setError(err.message);
-      // Rollback optimistic update (avoid full refetch/refresh)
+     
       setOrders(prevOrders);
     }
   };
 
   const markComplete = async (orderId) => {
     try {
-      // Optimistic
+    
       setOrders((prev) => prev.filter((o) => o.id !== orderId));
       await completeOrder(orderId);
       await refetch();
@@ -69,7 +69,7 @@ export function useOrders() {
       console.log("Creating order with data:", orderData);
       const created = await createOrderApi(orderData);
       console.log("Order created successfully:", created);
-      // Add real order after successful API call
+      
       setOrders((prev) => [created, ...prev]);
       setError(null);
       return created;

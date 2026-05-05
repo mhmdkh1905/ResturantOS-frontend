@@ -9,23 +9,23 @@ export default function WeeklyRevenueChart({ data }) {
       <h2 className={styles.title}>Weekly Revenue</h2>
 
       <div className={styles.chart}>
-        {/* Y axis */}
+       
         <div className={styles.yAxis}>
           {steps.map((s) => (
             <span key={s}>{s}</span>
           ))}
         </div>
 
-        {/* Grid + bars */}
+       
         <div className={styles.chartBody}>
-          {/* Horizontal grid lines */}
+         
           <div className={styles.gridLines}>
             {steps.map((_, i) => (
               <div key={i} className={styles.gridLine} />
             ))}
           </div>
 
-          {/* Bars */}
+          
           <div className={styles.bars}>
             {data.map((d) => {
               const pct = max === 0 ? 0 : (d.revenue / max) * 100;

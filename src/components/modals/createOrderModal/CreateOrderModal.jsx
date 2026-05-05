@@ -12,6 +12,23 @@ import { useMenu } from "../../../hooks/useMenu.js";
 import { useTables } from "../../../hooks/useTables.js";
 import styles from "./CreateOrderModal.module.css";
 
+function MenuItemImage({ src, alt, small = false }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!src || failed) {
+    return <ImageIcon size={small ? 20 : 24} />;
+  }
+
+  return (
+    <img
+      className={styles.itemPhoto}
+      src={src}
+      alt={alt}
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
   const [selectedTableId, setSelectedTableId] = useState("");
   const [menuSearch, setMenuSearch] = useState("");
@@ -25,9 +42,13 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
   const { menuItems } = useMenu();
   const { tables } = useTables();
 
-  // Reset form on modal open using key re-mount
+ 
   const subtotal = useMemo(
-    () => orderItems.reduce((sum, item) => sum + item.qty * item.price, 0),
+    () =>
+      orderItems.reduce(
+        (sum, item) => sum + item.qty * Number(item.price ?? 0),
+        0,
+      ),
     [orderItems],
   );
   const grandTotal = useMemo(
@@ -38,7 +59,7 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
   const filteredMenu = useMemo(
     () =>
       menuItems.filter((item) =>
-        item.name.toLowerCase().includes(menuSearch.toLowerCase()),
+        (item.name || "").toLowerCase().includes(menuSearch.toLowerCase()),
       ),
     [menuItems, menuSearch],
   );
@@ -75,14 +96,16 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
     e.preventDefault();
     if (!selectedTableId || orderItems.length === 0) return;
 
-    // Slim payload per spec: IDs + quantities only (prices/names frontend display)
+   
     const orderData = {
       tableId: selectedTableId,
       items: orderItems.map((i) => ({
-        menuItemId: i.id,
+        menuItemId: i._id || i.id,
         quantity: i.qty,
       })),
       notes,
+      note: notes,
+      specialInstructions: notes,
     };
 
     setIsSubmitting(true);
@@ -139,7 +162,7 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
             </div>
           </div>
 
-          {/* Menu Search & Grid */}
+         
           <div className={styles.field}>
             <label>Menu Items</label>
             <div className={styles.itemSearch}>
@@ -156,17 +179,17 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
               ) : (
                 filteredMenu.slice(0, 8).map((item) => (
                   <div
-                    key={item.id}
+                    key={item._id || item.id}
                     className={styles.menuItemCard}
                     onClick={() => setSelectedMenuItem(item)}
                   >
                     <div className={styles.itemImage}>
-                      <ImageIcon size={24} />
+                      <MenuItemImage src={item.image} alt={item.name} />
                     </div>
                     <div className={styles.itemDetails}>
                       <div className={styles.itemName}>{item.name}</div>
                       <div className={styles.itemPrice}>
-                        ${item.price?.toFixed(2)}
+                        ${Number(item.price ?? 0).toFixed(2)}
                       </div>
                     </div>
                   </div>
@@ -175,17 +198,20 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
             </div>
           </div>
 
-          {/* Current Selection Stepper */}
           {selectedMenuItem && (
             <div className={styles.selectionPanel}>
               <div className={styles.selectionInfo}>
                 <div className={styles.itemImageSmall}>
-                  <ImageIcon size={20} />
+                  <MenuItemImage
+                    src={selectedMenuItem.image}
+                    alt={selectedMenuItem.name}
+                    small
+                  />
                 </div>
                 <div>
                   <div className={styles.itemName}>{selectedMenuItem.name}</div>
                   <div className={styles.itemPrice}>
-                    ${selectedMenuItem.price?.toFixed(2)}
+                    ${Number(selectedMenuItem.price ?? 0).toFixed(2)}
                   </div>
                 </div>
               </div>
@@ -212,12 +238,12 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
                 className={styles.addBtnLarge}
               >
                 Add {currentQty > 1 && `x${currentQty}`} - $
-                {(currentQty * selectedMenuItem.price).toFixed(2)}
+                {(currentQty * Number(selectedMenuItem.price ?? 0)).toFixed(2)}
               </button>
             </div>
           )}
 
-          {/* Order Items List */}
+          
           {orderItems.length > 0 && (
             <div className={styles.itemsList}>
               <h4>
@@ -229,7 +255,7 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
                   <div className={styles.orderItemInfo}>
                     <div className={styles.itemName}>{item.name}</div>
                     <div className={styles.lineTotal}>
-                      ${(item.qty * item.price).toFixed(2)}
+                      ${(item.qty * Number(item.price ?? 0)).toFixed(2)}
                     </div>
                   </div>
                   <div className={styles.orderItemControls}>
@@ -263,7 +289,7 @@ export default function CreateOrderModal({ isOpen, onClose, onCreate }) {
             </div>
           )}
 
-          {/* Totals Panel */}
+         
           <div className={styles.totalsPanel}>
             <div className={styles.totalRow}>
               <span>Subtotal:</span>

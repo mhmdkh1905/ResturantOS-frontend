@@ -6,7 +6,6 @@ import {
   Package,
   ChefHat,
   Grid2x2,
-  BarChart2,
   Plus,
 } from "lucide-react";
 import StatCard from "../../components/cards/statCard/StatCard.jsx";
@@ -21,7 +20,6 @@ const QUICK_LINKS = [
   { label: "Orders", icon: ShoppingCart, to: "/orders", color: "#f97316" },
   { label: "Kitchen", icon: ChefHat, to: "/kitchen", color: "#f97316" },
   { label: "Tables", icon: Grid2x2, to: "/tables", color: "#3b82f6" },
-  { label: "Analytics", icon: BarChart2, to: "/analytics", color: "#10b981" },
 ];
 
 export default function Dashboard() {

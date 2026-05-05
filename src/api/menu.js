@@ -3,16 +3,17 @@ import api from "../lib/axios.js";
 export const getMenu = async () => {
   const res = await api.get("/menu");
 
-  const menu = res.data.data;
+  const menu = res.data?.data ?? res.data ?? [];
+  const items = Array.isArray(menu) ? menu : [];
 
-  return menu.map((item) => ({
-    id: item._id,
-    name: item.name,
-    price: item.price,
-    category: item.category,
-    image: item.image,
-    recipe: item.recipe || [],
-    isAvailable: item.isAvailable,
+  return items.map((item) => ({
+    _id: item._id,
+    name: item.name ?? "",
+    price: Number(item.price ?? 0),
+    category: item.category ?? "Uncategorized",
+    image: item.image ?? "",
+    ingredients: item.ingredients || [],
+    isAvailable: item.isAvailable ?? true,
   }));
 };
 
@@ -23,10 +24,8 @@ export const createMenuItem = async (data) => {
     category: data.category,
     isAvailable: data.isAvailable,
     ...(data.image?.trim() && { image: data.image.trim() }),
-    ...(data.recipe?.length > 0 && {
-      recipe: data.recipe.filter(
-        (ing) => ing.ingredientName?.trim() && ing.quantity > 0,
-      ),
+    ...(data.ingredients?.length > 0 && {
+      ingredients: data.ingredients,
     }),
   };
   const res = await api.post("/menu", payload);
@@ -39,8 +38,10 @@ export const updateMenuItem = async (id, data) => {
     ...(data.price !== undefined && { price: data.price }),
     ...(data.category && { category: data.category }),
     ...(data.image && { image: data.image }),
-    ...(data.recipe && { recipe: data.recipe }),
-    ...(data.isAvailable && { isAvailable: data.isAvailable }),
+    ...(data.ingredients && { ingredients: data.ingredients }),
+    ...(data.isAvailable !== undefined && {
+      isAvailable: data.isAvailable,
+    }),
   };
   const res = await api.put(`/menu/${id}`, payload);
   return res.data;

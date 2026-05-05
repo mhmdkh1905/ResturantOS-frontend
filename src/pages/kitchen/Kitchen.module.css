@@ -29,7 +29,7 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #111;
+  color: var(--page-text);
 }
 
 .iconBtn:hover {
@@ -40,17 +40,14 @@
 
 .title {
   font-size: 2rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #111 0%, #333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 700;
+  color: var(--page-text);
   margin: 0;
 }
 
 .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: var(--page-text-muted);
   margin-top: 4px;
 }
 
@@ -65,7 +62,8 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: #f8f9fa;
+  background: var(--surface-2);
+  color: var(--page-text);
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
@@ -96,8 +94,9 @@
 
 .filterBtn {
   padding: 8px 16px;
-  border: 2px solid #e5e7eb;
-  background: white;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--page-text);
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -107,9 +106,9 @@
 
 .filterBtn.active,
 .filterBtn:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
-  color: #1e40af;
+  border-color: var(--accent);
+  background: var(--status-pending-bg);
+  color: var(--page-text);
 }
 
 .kanban {
@@ -148,7 +147,7 @@
 .columnTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
   margin: 0;
 }
 
@@ -161,14 +160,14 @@
   padding: 0 10px;
   border-radius: 999px;
   background: rgba(17, 24, 39, 0.08);
-  color: #111;
+  color: var(--page-text);
   font-weight: 800;
   font-size: 0.85rem;
 }
 
 .emptyColumn {
   text-align: center;
-  color: #9ca3af;
+  color: var(--page-text-muted);
   padding: 40px 20px;
   font-style: italic;
 }
@@ -185,13 +184,13 @@
   align-items: center;
   justify-content: center;
   height: 400px;
-  color: #666;
+  color: var(--page-text-muted);
   font-size: 1.1rem;
 }
 
 .error {
   text-align: center;
-  color: #dc2626;
+  color: var(--error);
   padding: 48px 24px;
   font-size: 1rem;
 }
@@ -199,7 +198,7 @@
 .empty {
   text-align: center;
   padding: 64px 24px;
-  color: #666;
+  color: var(--page-text-muted);
 }
 
 .emptyIcon {

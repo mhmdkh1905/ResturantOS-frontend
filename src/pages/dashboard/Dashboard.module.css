@@ -23,7 +23,6 @@
   color: var(--page-text-muted);
 }
 
-/* Stat grid */
 .statGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -56,7 +55,7 @@
   }
 }
 
-/* Middle row */
+
 .midRow {
   display: grid;
   grid-template-columns: 1fr 380px;
@@ -70,7 +69,7 @@
   }
 }
 
-/* Quick links */
+
 .quickGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

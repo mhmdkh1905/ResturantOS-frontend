@@ -12,8 +12,6 @@ export default function Orders() {
     loading,
     error,
     refetch,
-    updateStatus,
-    markComplete,
     createOrder,
   } = useOrders();
   const { tables } = useTables();
@@ -152,8 +150,6 @@ export default function Orders() {
             <OrderCard
               key={order.id}
               order={order}
-              onUpdateStatus={updateStatus}
-              onComplete={markComplete}
               isUpdating={false}
             />
           ))}

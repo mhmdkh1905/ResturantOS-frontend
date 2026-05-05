@@ -5,11 +5,15 @@ import { useTables } from "../../hooks/useTables.js";
 import OrderCard from "../../components/cards/orderCard/OrderCard.jsx";
 import styles from "./Kitchen.module.css";
 
-const STATUS_COLORS = {
-  pending: { dot: "var(--status-pending)" },
-  preparing: { dot: "var(--status-preparing)" },
-  ready: { dot: "var(--status-ready)" },
-};
+const getOrderNotes = (order = {}) =>
+  order.notes ??
+  order.note ??
+  order.orderNotes ??
+  order.specialInstructions ??
+  order.instructions ??
+  order.comment ??
+  order.comments ??
+  "";
 
 export default function Kitchen() {
   const { orders, loading, error, refetch, updateStatus, markComplete } =
@@ -50,7 +54,7 @@ export default function Kitchen() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Kitchen Dashboard</h1>
+          <h1 className={styles.title}>Kitchen</h1>
         </div>
         <div className={styles.headerActions}>
           <button className={styles.iconBtn} onClick={refetch} title="Refresh">
@@ -79,12 +83,15 @@ export default function Kitchen() {
                 key={order.id}
                 order={{
                   ...order,
+                  notes: getOrderNotes(order),
                   tableNumber:
                     tableNumberById.get(order.tableId) ?? order.tableNumber,
                 }}
                 onUpdateStatus={updateStatus}
                 onComplete={() => {}}
                 isUpdating={false}
+                showActions
+                showEmptyNotes
               />
             ))
           )}
@@ -103,12 +110,15 @@ export default function Kitchen() {
                 key={order.id}
                 order={{
                   ...order,
+                  notes: getOrderNotes(order),
                   tableNumber:
                     tableNumberById.get(order.tableId) ?? order.tableNumber,
                 }}
                 onUpdateStatus={updateStatus}
                 onComplete={() => {}}
                 isUpdating={false}
+                showActions
+                showEmptyNotes
               />
             ))
           )}
@@ -127,12 +137,15 @@ export default function Kitchen() {
                 key={order.id}
                 order={{
                   ...order,
+                  notes: getOrderNotes(order),
                   tableNumber:
                     tableNumberById.get(order.tableId) ?? order.tableNumber,
                 }}
                 onUpdateStatus={() => {}}
                 onComplete={markComplete}
                 isUpdating={false}
+                showActions
+                showEmptyNotes
               />
             ))
           )}

@@ -12,7 +12,7 @@
 }
 
 .icon {
-  color: #888;
+  color: var(--page-text-muted);
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -27,14 +27,14 @@
 
 .description {
   font-size: 0.78rem;
-  color: #999;
+  color: var(--page-text-muted);
 }
 
 .toggle {
   width: 44px;
   height: 24px;
   border-radius: 99px;
-  background: #d1d5db;
+  background: var(--border-strong);
   border: none;
   cursor: pointer;
   position: relative;
@@ -54,7 +54,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--surface);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease;
 }

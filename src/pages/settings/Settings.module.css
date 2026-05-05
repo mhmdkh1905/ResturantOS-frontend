@@ -19,7 +19,7 @@
 
 .divider {
   height: 1px;
-  background: #f0f0f0;
+  background: var(--border);
   margin: 4px 0;
   background: var(--card-border);
 }

@@ -21,19 +21,29 @@
   --page-bg: #fafafa;
   --page-text: #14181e;
   --page-text-muted: #6a7281;
+  --text-strong: #111827;
+  --text-soft: #4b5563;
   --error: #dc2626;
   --card-bg: #ffffff;
   --card-border: #e5e7eb;
   --input-bg: #fafafa;
   --input-border: #2a2a2a;
+  --input-text: #111827;
+  --input-placeholder: #9ca3af;
 
   --free-status: #dcfce7;
+  --free-status-text: #166534;
   --reserved-status: #fdf3e0;
+  --reserved-status-text: #92400e;
   --occupied-status: #fbe2e2;
+  --occupied-status-text: #991b1b;
 
   --role-manager: #ebf3fe;
+  --role-manager-text: #1d4ed8;
   --role-chef: #fdf5eb;
+  --role-chef-text: #b45309;
   --role-waiter: #ebf9f0;
+  --role-waiter-text: #15803d;
 
   --profile-pic-placeholder-bg: #fdf2ec;
 
@@ -41,8 +51,18 @@
 
   --surface: #ffffff;
   --surface-2: #f8fafc;
+  --surface-3: #fff7ed;
   --border: #e5e7eb;
   --border-strong: #cbd5e1;
+  --divider: rgba(17, 24, 39, 0.08);
+  --icon-muted: #64748b;
+  --danger: #ef4444;
+  --danger-bg: #fee2e2;
+  --danger-border: #fecaca;
+  --success: #10b981;
+  --success-bg: #dcfce7;
+  --warning: #eab308;
+  --warning-bg: #fef3c7;
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.1);
 
@@ -69,8 +89,10 @@
   --nav-hover-bg: #2a2a2a;
 
   --page-bg: #0f1115;
-  --page-text: #ffffff;
-  --page-text-muted: #737b8c;
+  --page-text: #f8fafc;
+  --page-text-muted: #9ca3af;
+  --text-strong: #f8fafc;
+  --text-soft: #cbd5e1;
 
   --error: #f87171;
 
@@ -81,18 +103,42 @@
   --card-border: #272b34;
   --input-bg: #0f1115;
   --input-border: #272b34;
+  --input-text: #f8fafc;
+  --input-placeholder: #6b7280;
 
   --free-status: #172d25;
+  --free-status-text: #86efac;
   --reserved-status: #31281e;
+  --reserved-status-text: #facc15;
   --occupied-status: #2f1d23;
+  --occupied-status-text: #fca5a5;
 
   --role-manager: #172539;
+  --role-manager-text: #93c5fd;
   --role-chef: #31281e;
+  --role-chef-text: #fdba74;
   --role-waiter: #172d25;
+  --role-waiter-text: #86efac;
 
   --profile-pic-placeholder-bg: #31221e;
 
   --row-hover: #1f2937;
+  --surface: #14181e;
+  --surface-2: #191f28;
+  --surface-3: #241b15;
+  --border: #272b34;
+  --border-strong: #3b4250;
+  --divider: rgba(255, 255, 255, 0.08);
+  --icon-muted: #94a3b8;
+  --danger: #fb7185;
+  --danger-bg: #3a1f25;
+  --danger-border: #7f1d1d;
+  --success: #34d399;
+  --success-bg: #123428;
+  --warning: #facc15;
+  --warning-bg: #342a12;
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 14px 32px rgba(0, 0, 0, 0.38);
 
   --signout-button-bg: #fb7185;
   --signout-button-border: #7f1d1d;

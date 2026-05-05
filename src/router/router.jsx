@@ -8,7 +8,6 @@ import Kitchen from "../pages/kitchen/Kitchen.jsx";
 import Tables from "../pages/tables/Tables.jsx";
 import Inventory from "../pages/inventory/Inventory.jsx";
 import Employees from "../pages/employees/Employees.jsx";
-import Analytics from "../pages/analytics/Analytics.jsx";
 import Settings from "../pages/settings/Settings.jsx";
 import Login from "../pages/login/Login.jsx";
 import Register from "../pages/register/Register.jsx";
@@ -17,6 +16,7 @@ import AdminRoute from "../routes/AdminRoute.jsx";
 import AdminChefRoute from "../routes/AdminChefRoute.jsx";
 import AdminWaiterRoute from "../routes/AdminWaiterRoute.jsx";
 import Unauthorized from "../pages/unauthorized/Unauthorized.jsx";
+import NotFound from "../pages/notFound/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
@@ -103,16 +103,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "analytics",
-        element: (
-          <ProtectedRoute>
-            <AdminRoute>
-              <Analytics />
-            </AdminRoute>
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "settings",
         element: (
           <ProtectedRoute>
@@ -122,6 +112,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "*", element: <NotFound /> },
 ]);
 
 export default router;

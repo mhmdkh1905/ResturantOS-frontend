@@ -1,5 +1,4 @@
 import { Clock, Users, CheckCircle2, Loader2 } from "lucide-react";
-import { getStatusString } from "../../../lib/utils.js";
 import styles from "./OrderCard.module.css";
 
 const STATUS_CONFIG = {
@@ -25,11 +24,23 @@ const STATUS_CONFIG = {
   },
 };
 
+const getOrderNotes = (order = {}) =>
+  order.notes ??
+  order.note ??
+  order.orderNotes ??
+  order.specialInstructions ??
+  order.instructions ??
+  order.comment ??
+  order.comments ??
+  "";
+
 export default function OrderCard({
   order,
   onUpdateStatus,
   onComplete,
   isUpdating,
+  showActions = false,
+  showEmptyNotes = false,
 }) {
   const timeAgo = new Date(order.createdAt).toLocaleTimeString([], {
     hour: "2-digit",
@@ -45,11 +56,11 @@ export default function OrderCard({
       : (order.tableId ?? "N/A"));
 
   const handleStatusClick = (nextStatus) => {
-    onUpdateStatus(order.id, nextStatus);
+    onUpdateStatus?.(order.id, nextStatus);
   };
 
   const handleComplete = () => {
-    onComplete(order.id);
+    onComplete?.(order.id);
   };
 
   const rawStatus = (order.status || "").toLowerCase();
@@ -64,13 +75,14 @@ export default function OrderCard({
   const uiStatus = statusClassMap[rawStatus] || "new";
 
   const status = STATUS_CONFIG[rawStatus] || STATUS_CONFIG.pending;
+  const notes = String(getOrderNotes(order)).trim();
 
   const canPrepare = rawStatus === "pending";
   const canReady = rawStatus === "preparing";
   const canDeliver = rawStatus === "ready";
 
   return (
-    <div className={`${styles.card} ${styles[status] || styles.new}`}>
+    <div className={`${styles.card} ${styles[uiStatus] || styles.new}`}>
       <div className={styles.header}>
         <div className={styles.tableInfo}>
           <Users size={16} />
@@ -106,43 +118,52 @@ export default function OrderCard({
         })}
       </div>
 
-      <div className={styles.actions}>
-        {canPrepare && (
-          <button
-            className={`${styles.btn} ${styles.btnPrimary}`}
-            onClick={() => handleStatusClick("preparing")}
-            disabled={isUpdating}
-          >
-            {isUpdating ? (
-              <Loader2 className={styles.spin} size={16} />
-            ) : (
-              "Prepare"
-            )}
-          </button>
-        )}
-        {canReady && (
-          <button
-            className={`${styles.btn} ${styles.btnSuccess}`}
-            onClick={() => handleStatusClick("ready")}
-            disabled={isUpdating}
-          >
-            Mark Ready
-          </button>
-        )}
-        {canDeliver && (
-          <button
-            className={`${styles.btn} ${styles.btnComplete}`}
-            onClick={handleComplete}
-            disabled={isUpdating}
-          >
-            {isUpdating ? (
-              <Loader2 className={styles.spin} size={16} />
-            ) : (
-              <CheckCircle2 size={16} />
-            )}
-          </button>
-        )}
-      </div>
+      {(notes || showEmptyNotes) && (
+        <div className={styles.notes}>
+          <span className={styles.notesLabel}>Notes</span>
+          <p>{notes || "No notes"}</p>
+        </div>
+      )}
+
+      {showActions && (
+        <div className={styles.actions}>
+          {canPrepare && (
+            <button
+              className={`${styles.btn} ${styles.btnPrimary}`}
+              onClick={() => handleStatusClick("preparing")}
+              disabled={isUpdating}
+            >
+              {isUpdating ? (
+                <Loader2 className={styles.spin} size={16} />
+              ) : (
+                "Prepare"
+              )}
+            </button>
+          )}
+          {canReady && (
+            <button
+              className={`${styles.btn} ${styles.btnSuccess}`}
+              onClick={() => handleStatusClick("ready")}
+              disabled={isUpdating}
+            >
+              Mark Ready
+            </button>
+          )}
+          {canDeliver && (
+            <button
+              className={`${styles.btn} ${styles.btnComplete}`}
+              onClick={handleComplete}
+              disabled={isUpdating}
+            >
+              {isUpdating ? (
+                <Loader2 className={styles.spin} size={16} />
+              ) : (
+                <CheckCircle2 size={16} />
+              )}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

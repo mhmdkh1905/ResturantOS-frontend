@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: #fafafa;
+  background: var(--page-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,13 +8,13 @@
 }
 
 .card {
-  background: #ffffff;
-  border: 1.5px solid #eeeeee;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
   border-radius: 20px;
   padding: 40px 36px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-md);
 }
 
 .logo {
@@ -27,7 +27,7 @@
 .logoIcon {
   width: 40px;
   height: 40px;
-  background: #f97316;
+  background: var(--accent);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -38,26 +38,26 @@
 .logoText {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
 }
 
 .title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
   margin-bottom: 4px;
 }
 
 .subtitle {
   font-size: 0.875rem;
-  color: #888;
+  color: var(--page-text-muted);
   margin-bottom: 28px;
 }
 
 .error {
-  background: #fff5f5;
-  border: 1.5px solid #fecaca;
-  color: #e53e3e;
+  background: var(--danger-bg);
+  border: 1.5px solid var(--danger-border);
+  color: var(--danger);
   font-size: 0.82rem;
   font-weight: 500;
   border-radius: 9px;
@@ -80,7 +80,7 @@
 .label {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #444;
+  color: var(--page-text);
 }
 
 .inputWrapper {
@@ -92,23 +92,23 @@
 .inputIcon {
   position: absolute;
   left: 12px;
-  color: #bbb;
+  color: var(--input-placeholder);
   pointer-events: none;
 }
 
 .input {
   width: 100%;
   padding: 11px 12px 11px 36px;
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid var(--border);
   border-radius: 10px;
   font-size: 0.875rem;
-  color: #111;
-  background: #fff;
+  color: var(--input-text);
+  background: var(--input-bg);
   outline: none;
   transition: border-color 0.15s;
 }
 .input:focus {
-  border-color: #f97316;
+  border-color: var(--accent);
 }
 
 /* Select doesn't need left padding for icon */
@@ -127,14 +127,14 @@
   right: 12px;
   background: none;
   border: none;
-  color: #bbb;
+  color: var(--input-placeholder);
   cursor: pointer;
   display: flex;
   padding: 4px;
   transition: color 0.15s;
 }
 .eyeBtn:hover {
-  color: #555;
+  color: var(--page-text);
 }
 
 .submitBtn {
@@ -142,7 +142,7 @@
   padding: 12px;
   border-radius: 11px;
   border: none;
-  background: #f97316;
+  background: var(--accent);
   color: #fff;
   font-size: 0.9rem;
   font-weight: 700;
@@ -153,7 +153,7 @@
     transform 0.1s;
 }
 .submitBtn:hover {
-  background: #ea6c0a;
+  background: var(--accent-hover);
 }
 .submitBtn:active {
   transform: scale(0.98);
@@ -162,12 +162,12 @@
 .switchText {
   text-align: center;
   font-size: 0.82rem;
-  color: #888;
+  color: var(--page-text-muted);
   margin-top: 24px;
 }
 
 .switchLink {
-  color: #f97316;
+  color: var(--accent);
   font-weight: 600;
   text-decoration: none;
 }

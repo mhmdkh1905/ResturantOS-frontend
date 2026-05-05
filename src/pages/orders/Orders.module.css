@@ -29,7 +29,7 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #111;
+  color: var(--page-text);
 }
 
 .iconBtn:hover {
@@ -48,7 +48,7 @@
     var(--accent) 0%,
     var(--accent-hover) 100%
   );
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 12px;
   font-weight: 600;
@@ -67,13 +67,13 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: #111;
+  color: var(--page-text);
   margin: 0;
 }
 
 .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: var(--page-text-muted);
   margin-top: 4px;
 }
 
@@ -94,14 +94,14 @@
 
 .statLabel {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--page-text-muted);
   font-weight: 600;
 }
 
 .statValue {
   font-size: 1.6rem;
   font-weight: 800;
-  color: #111;
+  color: var(--page-text);
   margin-top: 6px;
 }
 
@@ -112,7 +112,7 @@
 
 .stat {
   padding: 6px 12px;
-  background: #f8f9fa;
+  background: var(--surface-2);
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
@@ -129,6 +129,7 @@
   padding: 8px 16px;
   border: 2px solid var(--border);
   background: var(--surface);
+  color: var(--page-text);
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -153,7 +154,7 @@
   padding: 0 6px;
   border-radius: 999px;
   background: rgba(17, 24, 39, 0.08);
-  color: #111;
+  color: var(--page-text);
   font-size: 0.75rem;
   font-weight: 800;
 }
@@ -174,7 +175,7 @@
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #9ca3af;
+  color: var(--input-placeholder);
 }
 
 .searchInput {
@@ -184,6 +185,7 @@
   border-radius: 12px;
   font-size: 0.95rem;
   background: var(--surface);
+  color: var(--input-text);
 }
 
 .searchInput:focus {
@@ -208,15 +210,15 @@
 .empty {
   text-align: center;
   padding: 64px 24px;
-  color: #666;
+  color: var(--page-text-muted);
 }
 
 .successToast {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: #10b981;
-  color: white;
+  background: var(--success);
+  color: #ffffff;
   padding: 16px 24px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
