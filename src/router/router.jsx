@@ -20,6 +20,10 @@ import NotFound from "../pages/notFound/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Login />,
+  },
+  {
     path: "/login",
     element: <Login />,
   },
@@ -31,87 +35,70 @@ const router = createBrowserRouter([
     path: "/unauthorized",
     element: <Unauthorized />,
   },
+
   {
-    path: "/",
-    element: <RootLayout />,
+    path: "/app",
+    element: (
+      <ProtectedRoute>
+        <RootLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "dashboard",
-        element: (
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        ),
+        element: <Dashboard />,
       },
       {
         path: "orders",
-        element: (
-          <ProtectedRoute>
-            <Orders />
-          </ProtectedRoute>
-        ),
+        element: <Orders />,
       },
       {
         path: "menu",
         element: (
-          <ProtectedRoute>
-            <AdminWaiterRoute>
-              <Menu />
-            </AdminWaiterRoute>
-          </ProtectedRoute>
+          <AdminWaiterRoute>
+            <Menu />
+          </AdminWaiterRoute>
         ),
       },
       {
         path: "kitchen",
         element: (
-          <ProtectedRoute>
-            <AdminChefRoute>
-              <Kitchen />
-            </AdminChefRoute>
-          </ProtectedRoute>
+          <AdminChefRoute>
+            <Kitchen />
+          </AdminChefRoute>
         ),
       },
       {
         path: "tables",
         element: (
-          <ProtectedRoute>
-            <AdminWaiterRoute>
-              {" "}
-              <Tables />
-            </AdminWaiterRoute>
-          </ProtectedRoute>
+          <AdminWaiterRoute>
+            <Tables />
+          </AdminWaiterRoute>
         ),
       },
       {
         path: "inventory",
         element: (
-          <ProtectedRoute>
-            <AdminChefRoute>
-              <Inventory />
-            </AdminChefRoute>
-          </ProtectedRoute>
+          <AdminChefRoute>
+            <Inventory />
+          </AdminChefRoute>
         ),
       },
       {
         path: "employees",
         element: (
-          <ProtectedRoute>
-            <AdminRoute>
-              <Employees />
-            </AdminRoute>
-          </ProtectedRoute>
+          <AdminRoute>
+            <Employees />
+          </AdminRoute>
         ),
       },
       {
         path: "settings",
-        element: (
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        ),
+        element: <Settings />,
       },
     ],
   },
+
   { path: "*", element: <NotFound /> },
 ]);
 
