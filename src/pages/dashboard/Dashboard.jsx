@@ -1,13 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import {
-  ShoppingCart,
-  DollarSign,
-  Flame,
-  Package,
-  ChefHat,
-  Grid2x2,
-  Plus,
-} from "lucide-react";
+import { ShoppingCart, ChefHat, Grid2x2 } from "lucide-react";
 import StatCard from "../../components/cards/statCard/StatCard.jsx";
 import WeeklyRevenueChart from "../../components/charts/weeklyRevenueChart/WeeklyRevenueChart.jsx";
 import RecentOrders from "../../components/rows/recentOrdersRow/RecentOrders.jsx";
@@ -22,12 +13,68 @@ const QUICK_LINKS = [
   { label: "Tables", icon: Grid2x2, to: "/tables", color: "#3b82f6" },
 ];
 
-export default function Dashboard() {
-  const { data, isLoading, isError } = useDashboard();
-  const navigate = useNavigate();
+function DashboardSkeleton() {
+  const sk = styles.skeleton;
+  return (
+    <div className={styles.page}>
+      <span className={styles.srOnly}>Loading dashboard…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+      </div>
 
-  if (isLoading) return <p className={styles.loading}>Loading...</p>;
-  if (isError) return <p className={styles.error}>Error loading dashboard</p>;
+      <div className={styles.statGrid}>
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className={styles.skStat} aria-hidden />
+        ))}
+      </div>
+
+      <div className={styles.midRow}>
+        <div className={styles.skChart} aria-hidden />
+        <div className={styles.skPanel} aria-hidden />
+      </div>
+
+      <div className={styles.quickGrid}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} className={styles.skQuick} aria-hidden />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function Dashboard() {
+  const { data, isLoading, isError, error, refetch } = useDashboard();
+
+  if (isLoading) {
+    return (
+      <div role="status" aria-live="polite">
+        <DashboardSkeleton />
+      </div>
+    );
+  }
+
+  if (isError) {
+    const message =
+      error?.message || "We couldn't load the dashboard. Try again.";
+    return (
+      <div className={styles.stateWrap}>
+        <div className={`${styles.stateCard} ${styles.stateCardError}`}>
+          <p className={styles.stateTitle}>Something went wrong</p>
+          <p className={styles.stateHint}>{message}</p>
+          <button
+            type="button"
+            className={styles.retryBtn}
+            onClick={() => refetch()}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const {
     totalOrders,

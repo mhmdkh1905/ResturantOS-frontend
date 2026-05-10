@@ -15,6 +15,65 @@ const getOrderNotes = (order = {}) =>
   order.comments ??
   "";
 
+function SkeletonOrderCard() {
+  const sk = styles.shimmer;
+  return (
+    <div className={styles.skCard} aria-hidden>
+      <div className={styles.skCardTop}>
+        <div className={`${sk} ${styles.skCardLineMd}`} />
+        <div className={`${sk} ${styles.skCardLineSm}`} />
+      </div>
+      <div className={`${sk} ${styles.skBadge}`} />
+      <div className={styles.skLines}>
+        <div className={`${sk} ${styles.skRow}`} />
+        <div className={`${sk} ${styles.skRow}`} />
+        <div className={`${sk} ${styles.skRowShort}`} />
+      </div>
+      <div className={styles.skActions}>
+        <div className={`${sk} ${styles.skBtnGhost}`} />
+      </div>
+    </div>
+  );
+}
+
+function KitchenSkeleton() {
+  const sk = styles.shimmer;
+  const colConfigs = [
+    { key: "p", className: `${styles.column} ${styles.colPending}` },
+    { key: "r", className: `${styles.column} ${styles.colPreparing}` },
+    { key: "d", className: `${styles.column} ${styles.colReady}` },
+  ];
+
+  return (
+    <div className={styles.page} role="status" aria-live="polite">
+      <span className={styles.srOnly}>Loading kitchen…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+        <div className={styles.headerActions}>
+          <div className={`${sk} ${styles.skIconBtn}`} aria-hidden />
+        </div>
+      </div>
+
+      <div className={styles.kanban}>
+        {colConfigs.map((col) => (
+          <div key={col.key} className={col.className}>
+            <div className={styles.columnHeader}>
+              <div className={`${sk} ${styles.skColTitle}`} aria-hidden />
+              <div className={`${sk} ${styles.skCountPill}`} aria-hidden />
+            </div>
+            {Array.from({ length: 2 }).map((_, i) => (
+              <SkeletonOrderCard key={i} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Kitchen() {
   const { orders, loading, error, refetch, updateStatus, markComplete } =
     useOrders();
@@ -39,15 +98,7 @@ export default function Kitchen() {
   const readyCount = columns.ready.length;
 
   if (loading) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Kitchen</h1>
-          <p className={styles.subtitle}>Order preparation workflow</p>
-        </div>
-        <div className={styles.loading}>Loading kitchen orders...</div>
-      </div>
-    );
+    return <KitchenSkeleton />;
   }
 
   return (
@@ -55,6 +106,7 @@ export default function Kitchen() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Kitchen</h1>
+          <p className={styles.subtitle}>Prep board · live queue</p>
         </div>
         <div className={styles.headerActions}>
           <button className={styles.iconBtn} onClick={refetch} title="Refresh">
@@ -64,16 +116,24 @@ export default function Kitchen() {
       </div>
 
       {error && (
-        <div className={styles.error}>
-          Error: {error}. <button onClick={refetch}>Retry</button>
+        <div className={styles.errorBanner} role="alert">
+          <p className={styles.errorText}>
+            <span className={styles.errorLabel}>Could not load orders.</span>{" "}
+            {String(error)}
+          </p>
+          <button type="button" className={styles.retryBtn} onClick={refetch}>
+            Retry
+          </button>
         </div>
       )}
 
       <div className={styles.kanban}>
-        <div className={styles.column}>
+        <div className={`${styles.column} ${styles.colPending}`}>
           <div className={styles.columnHeader}>
             <h3 className={styles.columnTitle}>Pending</h3>
-            <span className={styles.columnCount}>{pendingCount}</span>
+            <span className={`${styles.columnCount} ${styles.countPending}`}>
+              {pendingCount}
+            </span>
           </div>
           {columns.pending.length === 0 ? (
             <div className={styles.emptyColumn}>No pending orders</div>
@@ -97,10 +157,12 @@ export default function Kitchen() {
           )}
         </div>
 
-        <div className={styles.column}>
+        <div className={`${styles.column} ${styles.colPreparing}`}>
           <div className={styles.columnHeader}>
             <h3 className={styles.columnTitle}>Preparing</h3>
-            <span className={styles.columnCount}>{preparingCount}</span>
+            <span className={`${styles.columnCount} ${styles.countPreparing}`}>
+              {preparingCount}
+            </span>
           </div>
           {columns.preparing.length === 0 ? (
             <div className={styles.emptyColumn}>No orders in preparation</div>
@@ -124,10 +186,12 @@ export default function Kitchen() {
           )}
         </div>
 
-        <div className={styles.column}>
+        <div className={`${styles.column} ${styles.colReady}`}>
           <div className={styles.columnHeader}>
             <h3 className={styles.columnTitle}>Ready</h3>
-            <span className={styles.columnCount}>{readyCount}</span>
+            <span className={`${styles.columnCount} ${styles.countReady}`}>
+              {readyCount}
+            </span>
           </div>
           {columns.ready.length === 0 ? (
             <div className={styles.emptyColumn}>No ready orders</div>

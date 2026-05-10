@@ -66,17 +66,12 @@ export function useOrders() {
 
   const createOrder = async (orderData) => {
     try {
-      console.log("Creating order with data:", orderData);
       const created = await createOrderApi(orderData);
-      console.log("Order created successfully:", created);
-      
       setOrders((prev) => [created, ...prev]);
       setError(null);
       return created;
     } catch (err) {
-      console.error("Create order failed:", err);
-      const errorMsg = err.message || "Failed to create order";
-      setError(errorMsg);
+      setError(err.message || "Failed to create order");
       refetch();
       throw err;
     }

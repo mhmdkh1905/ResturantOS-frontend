@@ -6,6 +6,27 @@ import { useEmployees } from "../../hooks/useEmployees.js";
 import Toast from "../../components/ui/Toast.jsx";
 import styles from "./Employees.module.css";
 
+function EmployeesSkeleton() {
+  const sk = styles.skeleton;
+  return (
+    <div className={styles.page} role="status" aria-live="polite">
+      <span className={styles.srOnly}>Loading employees…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+        <div className={`${sk} ${styles.skBtn}`} aria-hidden />
+      </div>
+      <div className={styles.grid} aria-hidden>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className={styles.skCard} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Employees() {
   const {
     employees,
@@ -67,7 +88,7 @@ export default function Employees() {
   }, [successMessage]);
 
   if (isLoading) {
-    return <p className={styles.loading}>Loading employees...</p>;
+    return <EmployeesSkeleton />;
   }
 
   if (isError) {
@@ -77,7 +98,12 @@ export default function Employees() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Employees</h1>
+        <div>
+          <h1 className={styles.title}>Employees</h1>
+          <p className={styles.subtitle}>
+            Roles, hours, salary — keep your roster current.
+          </p>
+        </div>
         <button className={styles.addBtn} onClick={() => setShowModal(true)}>
           <Plus size={16} />
           Add Employee

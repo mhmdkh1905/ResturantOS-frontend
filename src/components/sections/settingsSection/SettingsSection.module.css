@@ -4,8 +4,10 @@
 }
 
 .sectionLabel {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--page-text);
-  margin-bottom: 16px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--page-text-muted);
+  margin-bottom: 12px;
 }

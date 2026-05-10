@@ -6,14 +6,69 @@ import CreateOrderModal from "../../components/modals/createOrderModal/CreateOrd
 import OrderCard from "../../components/cards/orderCard/OrderCard.jsx";
 import styles from "./Orders.module.css";
 
+function OrdersSkeletonCard() {
+  const sk = styles.shimmer;
+  return (
+    <div className={styles.skOrderCard} aria-hidden>
+      <div className={styles.skOrderTop}>
+        <div className={`${sk} ${styles.skOrderLineL}`} />
+        <div className={`${sk} ${styles.skOrderLineR}`} />
+      </div>
+      <div className={`${sk} ${styles.skOrderBadge}`} />
+      <div className={styles.skOrderLines}>
+        <div className={`${sk} ${styles.skOrderRow}`} />
+        <div className={`${sk} ${styles.skOrderRow}`} />
+      </div>
+      <div className={`${sk} ${styles.skOrderNotes}`} />
+    </div>
+  );
+}
+
+function OrdersSkeleton() {
+  const sk = styles.shimmer;
+  return (
+    <div className={styles.page} role="status" aria-live="polite">
+      <span className={styles.srOnly}>Loading orders…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+        <div className={styles.headerActions}>
+          <div className={`${sk} ${styles.skIconBtn}`} aria-hidden />
+          <div className={`${sk} ${styles.skNewOrderBtn}`} aria-hidden />
+        </div>
+      </div>
+
+      <div className={styles.statCards}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} className={styles.skStatCard} aria-hidden>
+            <div className={`${sk} ${styles.skStatLabel}`} />
+            <div className={`${sk} ${styles.skStatValue}`} />
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.filters}>
+        <div className={`${sk} ${styles.skSearch}`} aria-hidden />
+        <div className={styles.skFilterBtns}>
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className={`${sk} ${styles.skFilterChip}`} aria-hidden />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.grid}>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <OrdersSkeletonCard key={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Orders() {
-  const {
-    orders,
-    loading,
-    error,
-    refetch,
-    createOrder,
-  } = useOrders();
+  const { orders, loading, error, refetch, createOrder } = useOrders();
   const { tables } = useTables();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -48,7 +103,7 @@ export default function Orders() {
   const readyCount = orders.filter((o) => o.status === "ready").length;
 
   if (loading) {
-    return <p className={styles.loading}>Loading orders...</p>;
+    return <OrdersSkeleton />;
   }
 
   return (
@@ -56,9 +111,7 @@ export default function Orders() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Orders</h1>
-          <p className={styles.subtitle}>
-            {activeCount} active orders • ${totalToday.toFixed(2)} today
-          </p>
+
         </div>
         <div className={styles.headerActions}>
           <button className={styles.iconBtn} onClick={refetch} title="Refresh">
@@ -128,8 +181,14 @@ export default function Orders() {
       </div>
 
       {error && (
-        <div className={styles.error}>
-          Error: {error}. <button onClick={refetch}>Retry</button>
+        <div className={styles.errorBanner} role="alert">
+          <p className={styles.errorText}>
+            <span className={styles.errorLabel}>Could not load orders.</span>{" "}
+            {String(error)}
+          </p>
+          <button type="button" className={styles.retryBtn} onClick={refetch}>
+            Retry
+          </button>
         </div>
       )}
 
@@ -141,17 +200,22 @@ export default function Orders() {
 
       {filteredOrders.length === 0 ? (
         <div className={styles.empty}>
-          <h3>No orders match your filters</h3>
-          <p>Try adjusting your search or status filter.</p>
+          {orders.length === 0 ? (
+            <>
+              <h3>No orders yet</h3>
+              <p>Create the first order with the button above.</p>
+            </>
+          ) : (
+            <>
+              <h3>No orders match your filters</h3>
+              <p>Try adjusting your search or status filter.</p>
+            </>
+          )}
         </div>
       ) : (
         <div className={styles.grid}>
           {filteredOrders.map((order) => (
-            <OrderCard
-              key={order.id}
-              order={order}
-              isUpdating={false}
-            />
+            <OrderCard key={order.id} order={order} isUpdating={false} />
           ))}
         </div>
       )}

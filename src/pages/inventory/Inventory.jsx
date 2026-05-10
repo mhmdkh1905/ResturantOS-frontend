@@ -7,6 +7,53 @@ import styles from "./Inventory.module.css";
 
 import { useInventory } from "../../hooks/useInventory.js";
 
+function InventorySkeleton() {
+  const sk = styles.skeleton;
+  const rowDefs = ["24%", "10%", "8%", "10%", "14%", "10%", "18%", "6%"];
+
+  return (
+    <div className={styles.page} role="status" aria-live="polite">
+      <span className={styles.srOnly}>Loading inventory…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+        <div className={`${sk} ${styles.skBtn}`} aria-hidden />
+      </div>
+
+      <div className={`${sk} ${styles.skSearch}`} aria-hidden />
+
+      <div className={`${styles.tableWrapper} ${styles.skTableOuter}`}>
+        <div className={styles.skHeadRow}>
+          {rowDefs.map((w, i) => (
+            <div
+              key={i}
+              className={`${sk} ${styles.skHeadChip}`}
+              style={{ width: w }}
+              aria-hidden
+            />
+          ))}
+        </div>
+        <div className={styles.skBody}>
+          {Array.from({ length: 9 }).map((_, ri) => (
+            <div key={ri} className={styles.skDataRow}>
+              {rowDefs.map((w, ci) => (
+                <div
+                  key={ci}
+                  className={`${sk} ${styles.skCell}`}
+                  style={{ width: w }}
+                  aria-hidden
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Inventory() {
   const {
     inventory,
@@ -78,7 +125,7 @@ export default function Inventory() {
   }, [successMessage]);
 
   if (isLoading) {
-    return <p className={styles.loading}>Loading inventory...</p>;
+    return <InventorySkeleton />;
   }
 
   if (isError) {
@@ -92,6 +139,9 @@ export default function Inventory() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Inventory</h1>
+          <p className={styles.subtitle}>
+            Ingredients, thresholds, supplier costs — in one ledger.
+          </p>
           {lowStockCount > 0 && (
             <p className={styles.lowStock}>
               <AlertTriangle size={14} />

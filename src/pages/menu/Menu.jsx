@@ -16,6 +16,35 @@ const ALL_CATEGORIES = [
   "Soup",
 ];
 
+function MenuSkeleton() {
+  const sk = styles.skeleton;
+  return (
+    <div className={styles.page} role="status" aria-live="polite">
+      <span className={styles.srOnly}>Loading menu…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+        <div className={`${sk} ${styles.skBtn}`} aria-hidden />
+      </div>
+      <div className={styles.controls}>
+        <div className={`${sk} ${styles.skSearch}`} aria-hidden />
+        <div className={styles.skTabs} aria-hidden>
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className={`${sk} ${styles.skTab}`} />
+          ))}
+        </div>
+      </div>
+      <div className={styles.grid} aria-hidden>
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className={styles.skCard} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Menu() {
   const {
     menuItems,
@@ -94,7 +123,7 @@ export default function Menu() {
     } catch {}
   };
 
-  if (isLoading) return <p className={styles.loading}>Loading menu...</p>;
+  if (isLoading) return <MenuSkeleton />;
   if (isError) return <p className={styles.error}>{error.message}</p>;
 
   return (

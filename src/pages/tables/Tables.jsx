@@ -9,6 +9,27 @@ import { useTables } from "../../hooks/useTables.js";
 
 import styles from "./Tables.module.css";
 
+function TablesSkeleton() {
+  const sk = styles.skeleton;
+  return (
+    <div className={styles.page} role="status" aria-live="polite">
+      <span className={styles.srOnly}>Loading tables…</span>
+      <div className={styles.header}>
+        <div>
+          <div className={`${sk} ${styles.skTitle}`} aria-hidden />
+          <div className={`${sk} ${styles.skSubtitle}`} aria-hidden />
+        </div>
+        <div className={`${sk} ${styles.skBtn}`} aria-hidden />
+      </div>
+      <div className={styles.grid} aria-hidden>
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div key={i} className={styles.skTile} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Tables() {
   const {
     tables,
@@ -93,7 +114,7 @@ export default function Tables() {
     updateTable({ id, data: { seats } });
   };
 
-  if (isLoading) return <p className={styles.loading}>Loading tables...</p>;
+  if (isLoading) return <TablesSkeleton />;
 
   if (isError) {
     return <p className={styles.error}>{error.message}</p>;

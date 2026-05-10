@@ -24,15 +24,9 @@ const STATUS_CONFIG = {
   },
 };
 
-const getOrderNotes = (order = {}) =>
-  order.notes ??
-  order.note ??
-  order.orderNotes ??
-  order.specialInstructions ??
-  order.instructions ??
-  order.comment ??
-  order.comments ??
-  "";
+const getOrderNotes = (order = {}) => order.note ?? order.notes ?? "";
+
+
 
 export default function OrderCard({
   order,
@@ -42,10 +36,6 @@ export default function OrderCard({
   showActions = false,
   showEmptyNotes = false,
 }) {
-  const timeAgo = new Date(order.createdAt).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
   const tableLabel =
     order.tableNumber ??
     (typeof order.tableId === "object"
@@ -64,6 +54,11 @@ export default function OrderCard({
   };
 
   const rawStatus = (order.status || "").toLowerCase();
+
+ 
+
+
+  const total = Number(order.totalPrice ?? order.total ?? 0);
 
   const statusClassMap = {
     pending: "new",
@@ -87,10 +82,6 @@ export default function OrderCard({
         <div className={styles.tableInfo}>
           <Users size={16} />
           <span className={styles.table}>Table #{tableLabel}</span>
-        </div>
-        <div className={styles.time}>
-          <Clock size={14} />
-          <span>{timeAgo}</span>
         </div>
       </div>
 
@@ -122,6 +113,13 @@ export default function OrderCard({
         <div className={styles.notes}>
           <span className={styles.notesLabel}>Notes</span>
           <p>{notes || "No notes"}</p>
+        </div>
+      )}
+
+      {total > 0 && (
+        <div className={styles.totalRow}>
+          <span className={styles.totalLabel}>Total</span>
+          <span className={styles.totalValue}>${total.toFixed(2)}</span>
         </div>
       )}
 

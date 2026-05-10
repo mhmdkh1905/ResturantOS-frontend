@@ -33,7 +33,7 @@ export default function Settings() {
           <ToggleRow
             icon={<Sun size={18} />}
             label="Dark Mode"
-            description="Toggle dark/light theme"
+            description="Toggle dark / light theme for the console"
             checked={darkMode}
             onChange={(val) => dispatch(setTheme(val ? "dark" : "light"))}
           />
@@ -41,10 +41,24 @@ export default function Settings() {
 
         <div className={styles.divider} />
 
-        <button className={styles.signOutBtn} onClick={handleSignOut}>
-          <LogOut size={15} />
-          Sign Out
-        </button>
+
+
+        <div className={styles.divider} />
+
+        <SettingsSection label="Session">
+          <p className={styles.sectionHint}>
+            Sign out removes your saved token from this browser. You will need
+            to sign in again to use the dashboard.
+          </p>
+          <button
+            type="button"
+            className={styles.signOutBtn}
+            onClick={handleSignOut}
+          >
+            <LogOut size={15} />
+            Sign Out
+          </button>
+        </SettingsSection>
       </div>
     </div>
   );

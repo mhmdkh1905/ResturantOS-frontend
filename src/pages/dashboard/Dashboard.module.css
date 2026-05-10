@@ -12,15 +12,19 @@
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
   color: var(--page-text);
-  margin-bottom: 4px;
+  margin: 0 0 6px;
+  line-height: 1.15;
 }
 
 .subtitle {
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--page-text-muted);
+  margin: 0;
 }
 
 .statGrid {
@@ -30,18 +34,182 @@
   margin-bottom: 20px;
 }
 
-.loading {
-  color: var(--page-text-muted);
-  font-size: 0.9rem;
-  margin-top: 48px;
-  text-align: center;
+.stateWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: min(420px, 70vh);
+  padding: 32px 16px;
 }
 
-.error {
-  color: var(--error);
-  font-size: 0.9rem;
-  margin-top: 48px;
+.stateCard {
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 24px;
   text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stateCardError {
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.spinner {
+  color: var(--accent);
+  margin: 0 auto 16px;
+  animation: dashSpin 0.85s linear infinite;
+}
+
+@keyframes dashSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.stateTitle {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--page-text);
+}
+
+.stateHint {
+  margin: 0 0 20px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--page-text-muted);
+}
+
+.stateCardError .stateHint {
+  margin-bottom: 16px;
+}
+
+.retryBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 11px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-hover) 100%
+  );
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.retryBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes skShimmer {
+  0% {
+    background-position: 140% 0;
+  }
+  100% {
+    background-position: -140% 0;
+  }
+}
+
+.skeleton {
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    105deg,
+    var(--surface-2) 36%,
+    var(--border) 48%,
+    var(--border-strong) 52%,
+    var(--surface-2) 64%
+  );
+  background-size: 240% 100%;
+  animation: skShimmer 1.35s ease-in-out infinite;
+}
+
+.skTitle {
+  height: 28px;
+  max-width: 280px;
+  margin-bottom: 12px;
+}
+
+.skSubtitle {
+  height: 16px;
+  max-width: 200px;
+}
+
+.skStat {
+  min-height: 96px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    105deg,
+    var(--surface) 36%,
+    var(--surface-2) 50%,
+    var(--surface) 64%
+  );
+  background-size: 240% 100%;
+  animation: skShimmer 1.35s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+
+.skChart {
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    105deg,
+    var(--surface-2) 36%,
+    var(--border) 50%,
+    var(--surface-2) 64%
+  );
+  background-size: 240% 100%;
+  animation: skShimmer 1.35s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+
+.skPanel {
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    105deg,
+    var(--surface-2) 36%,
+    var(--border) 50%,
+    var(--surface-2) 64%
+  );
+  background-size: 240% 100%;
+  animation: skShimmer 1.35s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+
+.skQuick {
+  min-height: 72px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    105deg,
+    var(--surface) 36%,
+    var(--surface-2) 50%,
+    var(--surface) 64%
+  );
+  background-size: 240% 100%;
+  animation: skShimmer 1.35s ease-in-out infinite;
 }
 
 @media (max-width: 1024px) {

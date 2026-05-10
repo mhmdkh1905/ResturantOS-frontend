@@ -8,8 +8,6 @@ export default function SelectRow({
   onChange,
   options,
 }) {
-  const selected = options.find((o) => o.value === value);
-
   return (
     <div className={styles.row}>
       <div className={styles.left}>
