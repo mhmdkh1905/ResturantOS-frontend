@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../hooks/useAuth";
@@ -111,13 +111,6 @@ export default function Login() {
             {isLoginLoading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-
-        <p className={styles.switchText}>
-          Don't have an account?{" "}
-          <Link to="/register" className={styles.switchLink}>
-            Create one
-          </Link>
-        </p>
       </div>
     </div>
   );

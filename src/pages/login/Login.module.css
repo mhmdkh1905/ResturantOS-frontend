@@ -176,23 +176,6 @@
   object-fit: contain;
   border-radius: 10px;
 }
-/* Switch */
-.switchText {
-  text-align: center;
-  font-size: 0.82rem;
-  color: #888;
-  margin-top: 24px;
-}
-
-.switchLink {
-  color: #f97316;
-  font-weight: 600;
-  text-decoration: none;
-}
-.switchLink:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 480px) {
   .card {
     padding: 32px 20px;
