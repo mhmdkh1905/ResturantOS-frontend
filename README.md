@@ -113,24 +113,6 @@ Unauthenticated users are redirected to the login page. Authenticated users with
 
 ---
 
-## My Contribution
-
-I contributed to the frontend architecture and implementation of RestaurantOS, including:
-
-* Building responsive management pages and reusable UI components
-* Implementing client-side routing and protected routes
-* Creating role-based access guards for different employee roles
-* Connecting frontend features to backend REST APIs
-* Developing order, table, menu, inventory, employee, and kitchen workflows
-* Implementing authentication-related interfaces
-* Building modals, forms, status controls, and dashboard components
-* Supporting dark mode through centralized CSS variables
-* Debugging frontend behavior and API integration issues
-
-> Update this section so it describes only the parts you personally implemented.
-
----
-
 ## Technology Stack
 
 | Technology      | Purpose                                  |
