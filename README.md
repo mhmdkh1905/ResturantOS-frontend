@@ -1,313 +1,366 @@
 # 🍽️ RestaurantOS — Frontend
 
-A modern restaurant management system built with **React**, **React Router**, and **CSS Modules**. Manage tables, orders, inventory, employees, and more from a clean, responsive dashboard.
+A responsive restaurant management dashboard built with React for managing orders, tables, menu items, inventory, employees, and kitchen operations from one centralized platform.
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Application-22c55e?style=for-the-badge)](https://resturant-os-frontend-mu.vercel.app/)
+[![Backend Repository](https://img.shields.io/badge/Backend-Repository-181717?style=for-the-badge\&logo=github)](https://github.com/mhmdkh1905/ResturantOS-backend)
 
 ---
 
-## 📋 Table of Contents
+## Overview
 
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Pages & Features](#pages--features)
-- [Routing & Auth Guards](#routing--auth-guards)
-- [Theming & Dark Mode](#theming--dark-mode)
-- [Design System](#design-system)
-- [Available Scripts](#available-scripts)
+RestaurantOS is a full-stack restaurant management platform designed to simplify daily restaurant operations.
+
+The frontend provides role-based dashboards and management tools for administrators, chefs, waiters, and other restaurant employees. It communicates with the RestaurantOS backend through REST APIs to manage operational data and protected workflows.
+
+The application includes authentication, role-based authorization, order processing, kitchen workflows, table management, inventory tracking, employee management, and analytics.
 
 ---
 
-## 🛠️ Tech Stack
+## Key Features
 
-| Technology      | Purpose                  |
-| --------------- | ------------------------ |
-| React 18        | UI framework             |
-| React Router v6 | Client-side routing      |
-| CSS Modules     | Scoped component styling |
-| Lucide React    | Icon library             |
-| Vite            | Build tool & dev server  |
+### Authentication and Authorization
+
+* User registration and login
+* Protected application routes
+* Role-based access control
+* Unauthorized-access page
+* Automatic redirection for unauthenticated users
+
+### Dashboard
+
+* Restaurant activity overview
+* Total-order statistics
+* Daily income summary
+* Active-order tracking
+* Low-stock alerts
+* Weekly revenue visualization
+* Recent-orders overview
+
+### Order Management
+
+* View and filter restaurant orders
+* Search orders by table
+* Create orders using menu items
+* Add quantities, discounts, and notes
+* Update order status
+* Follow orders through preparation workflows
+
+### Kitchen Display
+
+* View active kitchen orders
+* Display order details for chefs
+* Update preparation statuses
+* Restrict access to authorized roles
+
+### Menu Management
+
+* Browse menu items by category
+* Add, edit, and delete menu items
+* Manage prices and availability
+* Store images and recipe ingredients
+
+### Table Management
+
+* View restaurant tables in a visual grid
+* Track free, reserved, and occupied tables
+* Add and delete tables
+* Update table capacity
+* Change table status
+
+### Inventory Management
+
+* View and search inventory records
+* Track stock quantities
+* Display low-stock warnings
+* Configure stock thresholds
+* Store supplier and cost information
+* Edit inventory records
+
+### Employee Management
+
+* View employees and assigned roles
+* Add, edit, and delete employees
+* Restrict employee management to administrators
+* Support restaurant roles such as manager, chef, waiter, cashier, and cleaner
+
+### Settings and Appearance
+
+* Light and dark themes
+* Language selection
+* Centralized design tokens
+* Responsive interface
+* Sign-out functionality
 
 ---
 
-## 📁 Project Structure
+## Role-Based Access
 
-```
+| Page      | Access                  |
+| --------- | ----------------------- |
+| Dashboard | All authenticated users |
+| Orders    | All authenticated users |
+| Menu      | Admin and waiter        |
+| Kitchen   | Admin and chef          |
+| Tables    | Admin and waiter        |
+| Inventory | Admin and chef          |
+| Employees | Admin only              |
+| Settings  | All authenticated users |
+
+Unauthenticated users are redirected to the login page. Authenticated users without the required role are redirected to the unauthorized page.
+
+---
+
+## My Contribution
+
+I contributed to the frontend architecture and implementation of RestaurantOS, including:
+
+* Building responsive management pages and reusable UI components
+* Implementing client-side routing and protected routes
+* Creating role-based access guards for different employee roles
+* Connecting frontend features to backend REST APIs
+* Developing order, table, menu, inventory, employee, and kitchen workflows
+* Implementing authentication-related interfaces
+* Building modals, forms, status controls, and dashboard components
+* Supporting dark mode through centralized CSS variables
+* Debugging frontend behavior and API integration issues
+
+> Update this section so it describes only the parts you personally implemented.
+
+---
+
+## Technology Stack
+
+| Technology      | Purpose                                  |
+| --------------- | ---------------------------------------- |
+| React 18        | Component-based user interface           |
+| React Router v6 | Navigation and protected routing         |
+| Vite            | Development server and production builds |
+| CSS Modules     | Component-scoped styling                 |
+| Lucide React    | Interface icons                          |
+| REST APIs       | Communication with the backend           |
+
+---
+
+## Project Structure
+
+```text
 src/
 ├── components/
 │   ├── layout/
-│   │   └── rootLayout/         # Main layout with sidebar
-│   ├── sidebar/                # Sidebar + NavItem
+│   ├── sidebar/
 │   ├── cards/
-│   │   ├── tableCard/          # Table status card
-│   │   └── orderCard/          # Order card with actions
 │   └── modals/
-│       ├── addTableModal/
-│       ├── addItemModal/
-│       ├── addEmployeeModal/
-│       └── createOrderModal/
 ├── pages/
-│   ├── dashboard/              # Overview + stats + charts
-│   ├── orders/                 # Order management
-│   ├── menu/                   # Menu items
-│   ├── kitchen/                # Kitchen display
-│   ├── tables/                 # Table management
-│   ├── inventory/              # Stock tracking
-│   ├── employees/              # Staff management
-│   ├── analytics/              # Reports & charts
-│   ├── settings/               # App preferences
-│   ├── login/                  # Auth - Login
-│   ├── register/               # Auth - Register
-│   ├── unauthorized/           # 403 page
-│   └── notFound/               # 404 page
+│   ├── dashboard/
+│   ├── orders/
+│   ├── menu/
+│   ├── kitchen/
+│   ├── tables/
+│   ├── inventory/
+│   ├── employees/
+│   ├── analytics/
+│   ├── settings/
+│   ├── login/
+│   ├── register/
+│   ├── unauthorized/
+│   └── notFound/
 ├── routes/
-│   ├── ProtectedRoute.jsx      # Requires login
-│   ├── AdminRoute.jsx          # Requires admin role
-│   ├── AdminChefRoute.jsx      # Requires admin or chef
-│   └── AdminWaiterRoute.jsx    # Requires admin or waiter
+│   ├── ProtectedRoute.jsx
+│   ├── AdminRoute.jsx
+│   ├── AdminChefRoute.jsx
+│   └── AdminWaiterRoute.jsx
 ├── hooks/
 │   ├── useOrders.js
 │   ├── useTables.js
 │   └── useMenu.js
 ├── router/
 │   └── router.jsx
-└── index.css                   # Global CSS variables & reset
+└── index.css
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js **v18+**
-- npm or yarn
+Make sure the following are installed:
+
+* Node.js 18 or newer
+* npm
+* The RestaurantOS backend API
 
 ### Installation
 
+Clone the repository:
+
 ```bash
-# 1. Clone the repository
-git clone https://github.com/your-username/restaurantos-frontend.git
-cd restaurantos-frontend
-
-# 2. Install dependencies
-npm install
-
-# 3. Set up environment variables
-cp .env.example .env
-# Fill in your values (see Environment Variables below)
-
-# 4. Start the development server
-npm run dev
+git clone https://github.com/mhmdkh1905/ResturantOS-frontend.git
+cd ResturantOS-frontend
 ```
 
-The app will be running at **http://localhost:5173**
+Install the project dependencies:
 
----
+```bash
+npm install
+```
 
-## 🔐 Environment Variables
-
-Create a `.env` file in the root of the project:
+Create a `.env` file in the project root:
 
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-| Variable       | Description                       |
-| -------------- | --------------------------------- |
-| `VITE_API_URL` | Base URL of your backend REST API |
-
----
-
-## 📄 Pages & Features
-
-### 🏠 Dashboard
-
-- Summary stats: Total Orders, Today's Income, Active Orders, Low Stock
-- Weekly Revenue bar chart
-- Recent Orders list with status badges
-- Quick navigation links to key pages
-
-### 📦 Orders
-
-- Live order list with status filtering (Pending / Preparing / Ready)
-- Search by table number
-- Create new orders via modal (select table, menu items, qty, discount, notes)
-- Update order status inline
-
-### 🍕 Menu
-
-- Browse all menu items by category
-- Add / edit / delete items
-- Each item includes name, price, category, image, recipe ingredients, and availability toggle
-
-### 👨‍🍳 Kitchen
-
-- Kitchen display view for active orders
-- Status updates for chefs
-
-### 🪑 Tables
-
-- Visual grid of all tables with status (Free / Reserved / Occupied)
-- Add and delete tables
-- Edit seat count inline
-- Change status via dropdown
-
-### 📊 Inventory
-
-- Full stock list with search
-- Low stock warnings with visual progress bars
-- Inline row editing
-- Add new inventory items with supplier, cost, threshold
-
-### 👥 Employees
-
-- Employee cards with role badges
-- Add / edit / delete employees
-- Roles: Manager, Chef, Waiter, Cashier, Cleaner
-
-### ⚙️ Settings
-
-- Dark Mode toggle
-- Display Language selector
-- Sign Out button
-
-### 🔒 Auth Pages
-
-- **Login** — email + password with show/hide toggle
-- **Register** — full name, email, role, password with validation
-
----
-
-## 🔑 Routing & Auth Guards
-
-All protected pages are wrapped in route guard components:
-
-```jsx
-// Requires any logged-in user
-<ProtectedRoute>
-  <Dashboard />
-</ProtectedRoute>
-
-// Requires admin role only
-<AdminRoute>
-  <Employees />
-</AdminRoute>
-
-// Requires admin or chef
-<AdminChefRoute>
-  <Kitchen />
-</AdminChefRoute>
-
-// Requires admin or waiter
-<AdminWaiterRoute>
-  <Tables />
-</AdminWaiterRoute>
-```
-
-| Route        | Guard            | Accessible By       |
-| ------------ | ---------------- | ------------------- |
-| `/dashboard` | ProtectedRoute   | All logged-in users |
-| `/orders`    | ProtectedRoute   | All logged-in users |
-| `/menu`      | AdminWaiterRoute | Admin, Waiter       |
-| `/kitchen`   | AdminChefRoute   | Admin, Chef         |
-| `/tables`    | AdminWaiterRoute | Admin, Waiter       |
-| `/inventory` | AdminChefRoute   | Admin, Chef         |
-| `/employees` | AdminRoute       | Admin only          |
-| `/settings`  | ProtectedRoute   | All logged-in users |
-
-Unauthenticated users are redirected to `/login`. Unauthorized users are redirected to `/unauthorized`.
-
----
-
-## 🌗 Theming & Dark Mode
-
-The app supports full **dark mode** via a `data-theme="dark"` attribute on `:root`.
-
-To toggle dark mode, set the attribute on the document root:
-
-```js
-document.documentElement.setAttribute("data-theme", "dark"); // dark
-document.documentElement.removeAttribute("data-theme"); // light
-```
-
-All colors are driven by CSS variables defined in `index.css`. Dark mode overrides are scoped under `:root[data-theme="dark"]`.
-
----
-
-## 🎨 Design System
-
-All design tokens live in `src/index.css` as CSS custom properties.
-
-### Key Variables
-
-```css
-/* Accent */
---accent: #f97316;
---accent-hover: #ea6c0a;
-
-/* Page */
---page-bg: #fafafa;
---page-text: #14181e;
---page-text-muted: #6a7281;
-
-/* Surfaces */
---surface: #ffffff;
---surface-2: #f8fafc;
-
-/* Borders & Shadows */
---border: #e5e7eb;
---shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.04);
---shadow-md: 0 10px 24px rgba(0, 0, 0, 0.1);
-
-/* Status Colors */
---status-pending: #f97316;
---status-preparing: #eab308;
---status-ready: #10b981;
---status-served: #64748b;
-```
-
-### Component Conventions
-
-- All components use **CSS Modules** (`.module.css`)
-- Cards: white background, `1.5px solid #eeeeee` border, `16px` border-radius
-- Buttons: `10–11px` border-radius, `600` font-weight
-- Modals: max-width `420px`, `#faf9f7` background, `16px` border-radius
-
----
-
-## 📜 Available Scripts
+Start the development server:
 
 ```bash
-# Start development server
 npm run dev
+```
 
-# Build for production
+The application should be available at:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Environment Variables
+
+| Variable       | Required | Description                              |
+| -------------- | -------: | ---------------------------------------- |
+| `VITE_API_URL` |      Yes | Base URL of the RestaurantOS backend API |
+
+Example for local development:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Do not commit production credentials or private environment values.
+
+---
+
+## Available Scripts
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Create a production build:
+
+```bash
 npm run build
+```
 
-# Preview production build
+Preview the production build:
+
+```bash
 npm run preview
+```
 
-# Lint the codebase
+Run the linter:
+
+```bash
 npm run lint
 ```
 
 ---
 
-## 📦 Dependencies
+## Routing Architecture
 
-```bash
-# Core
-npm install react react-dom react-router-dom
+RestaurantOS uses route-wrapper components to control access.
 
-# Icons
-npm install lucide-react
-
-# Build
-npm install -D vite @vitejs/plugin-react
+```jsx
+<ProtectedRoute>
+  <Dashboard />
+</ProtectedRoute>
 ```
+
+```jsx
+<AdminRoute>
+  <Employees />
+</AdminRoute>
+```
+
+```jsx
+<AdminChefRoute>
+  <Kitchen />
+</AdminChefRoute>
+```
+
+```jsx
+<AdminWaiterRoute>
+  <Tables />
+</AdminWaiterRoute>
+```
+
+These guards ensure that users can access only the pages permitted for their assigned roles.
 
 ---
 
-> Built with ❤️ for restaurant operators. Pair with the RestaurantOS backend API for full functionality.
-> https://github.com/mhmdkh1905/ResturantOS-backend.git
+## Theming
+
+The frontend supports light and dark themes through CSS custom properties.
+
+Dark mode is activated using:
+
+```js
+document.documentElement.setAttribute("data-theme", "dark");
+```
+
+Light mode is restored using:
+
+```js
+document.documentElement.removeAttribute("data-theme");
+```
+
+The design system is maintained in `src/index.css`, including:
+
+* Background colors
+* Text colors
+* Surface colors
+* Border styles
+* Shadows
+* Status colors
+* Button styles
+* Component spacing
+
+---
+
+## Related Repository
+
+RestaurantOS requires the backend API for authentication, data persistence, and application workflows.
+
+* [RestaurantOS Backend](https://github.com/mhmdkh1905/ResturantOS-backend)
+
+---
+
+## Live Application
+
+* [Open RestaurantOS](https://resturant-os-frontend-mu.vercel.app/)
+
+---
+
+## Future Improvements
+
+* Add automated frontend tests
+* Improve loading and error states
+* Add more detailed analytics
+* Improve accessibility support
+* Add multilingual content
+* Add real-time order updates
+* Expand mobile and tablet optimization
+
+---
+
+## Author
+
+**Mohammad Khateeb**
+
+* [GitHub](https://github.com/mhmdkh1905)
+* [LinkedIn](https://www.linkedin.com/in/mohammad-khateeb-891332303)
+* [Email](mailto:mhmd52kh@gmail.com)
