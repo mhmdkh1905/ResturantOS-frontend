@@ -2,8 +2,10 @@
 
 A responsive restaurant management dashboard built with React for managing orders, tables, menu items, inventory, employees, and kitchen operations from one centralized platform.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Application-22c55e?style=for-the-badge)](https://resturant-os-frontend-mu.vercel.app/)
-[![Backend Repository](https://img.shields.io/badge/Backend-Repository-181717?style=for-the-badge\&logo=github)](https://github.com/mhmdkh1905/ResturantOS-backend)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-22c55e?style=for-the-badge)](https://resturant-os-frontend-mu.vercel.app/)
+
+[![Backend Repository](https://img.shields.io/badge/Backend%20Repository-181717?style=for-the-badge\&logo=github)](https://github.com/mhmdkh1905/ResturantOS-backend)
+
 
 ---
 
